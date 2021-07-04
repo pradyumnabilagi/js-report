@@ -42,8 +42,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var puppeteer_1 = __importDefault(require("puppeteer"));
 var handlebars_1 = __importDefault(require("handlebars"));
 var CreatePdf = /** @class */ (function () {
+    /**
+     *
+     * @param _pdfOtpions Puppeteers pdfoprions
+     */
     function CreatePdf(_pdfOtpions) {
         var _this = this;
+        /**
+         * This comples the html
+         * @param html string
+         * @param data data for mofiying html
+         * @returns
+         */
+        this.compileHtmlString = function (html, data) {
+            var str = handlebars_1.default.compile(html)(data);
+            return str;
+        };
+        /**
+         * creates the of PDF file
+         * @param html string
+         * @param data data to handlebars
+         * @returns buffer
+         */
         this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
             var _a, page, source, pdf;
             return __generator(this, function (_b) {
@@ -56,15 +76,18 @@ var CreatePdf = /** @class */ (function () {
                         return [4 /*yield*/, this.browser.newPage()];
                     case 2:
                         page = _b.sent();
-                        source = handlebars_1.default.compile(html)(data);
+                        source = this.compileHtmlString(html, data);
                         return [4 /*yield*/, page.setContent(source)];
                     case 3:
                         _b.sent();
                         return [4 /*yield*/, page.pdf(this.pdfOptions)];
                     case 4:
                         pdf = _b.sent();
-                        return [4 /*yield*/, this.browser.close()];
+                        return [4 /*yield*/, page.close()];
                     case 5:
+                        _b.sent();
+                        return [4 /*yield*/, this.browser.close()];
+                    case 6:
                         _b.sent();
                         return [2 /*return*/, pdf];
                 }

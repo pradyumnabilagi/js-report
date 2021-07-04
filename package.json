@@ -1,10 +1,10 @@
 {
   "name": "js-ts-report",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "This creates report based on templates Html",
   "main": "build/index.js",
   "scripts": {
-    "dev": "tsc -p . && cd test && yalc add js-ts-report && yalc update js-ts-report  && npm run dev"
+    "dev": "tsc -p . && yalc publish && cd test && yalc add js-ts-report && yalc update js-ts-report  && npm run dev"
   },
   "repository": {
     "type": "git",
