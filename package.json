@@ -1,0 +1,23 @@
+{
+  "name": "js-report",
+  "version": "1.0.0",
+  "description": "This creates report based on templates Html",
+  "main": "build/index.js",
+  "scripts": {
+    "dev" : "tsc -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pradyumnabilagi/js-report.git"
+  },
+  "keywords": [
+    "pdf",
+    "templates"
+  ],
+  "author": "Pradyumna Bilagi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pradyumnabilagi/js-report/issues"
+  },
+  "homepage": "https://github.com/pradyumnabilagi/js-report#readme"
+}
