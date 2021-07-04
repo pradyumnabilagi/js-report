@@ -1,1 +1,1 @@
-# js-report
+# js-ts-report
