@@ -40,11 +40,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var puppeteer_1 = __importDefault(require("puppeteer"));
+var handlebars_1 = __importDefault(require("handlebars"));
 var CreatePdf = /** @class */ (function () {
     function CreatePdf(_pdfOtpions) {
         var _this = this;
-        this.create = function (html) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, page, pdf;
+        this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
+            var _a, page, source, pdf;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -55,7 +56,8 @@ var CreatePdf = /** @class */ (function () {
                         return [4 /*yield*/, this.browser.newPage()];
                     case 2:
                         page = _b.sent();
-                        return [4 /*yield*/, page.setContent(html)];
+                        source = handlebars_1.default.compile(html)(data);
+                        return [4 /*yield*/, page.setContent(source)];
                     case 3:
                         _b.sent();
                         return [4 /*yield*/, page.pdf(this.pdfOptions)];
