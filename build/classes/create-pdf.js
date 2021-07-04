@@ -61,6 +61,9 @@ var CreatePdf = /** @class */ (function () {
                         return [4 /*yield*/, page.pdf(this.pdfOptions)];
                     case 4:
                         pdf = _b.sent();
+                        return [4 /*yield*/, this.browser.close()];
+                    case 5:
+                        _b.sent();
                         return [2 /*return*/, pdf];
                 }
             });

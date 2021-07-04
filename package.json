@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/pradyumnabilagi/js-report#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "puppeteer": "^10.1.0"
   }
 }

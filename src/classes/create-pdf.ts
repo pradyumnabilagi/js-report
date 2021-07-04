@@ -16,6 +16,8 @@ export default class CreatePdf{
         let page = await this.browser.newPage();
         await page.setContent(html);
         let pdf =  await page.pdf(this.pdfOptions)
+        await this.browser.close()
+        
         return pdf
     }
 }
