@@ -1,4 +1,5 @@
 import CreatePdf from "./classes/create-pdf";
+import {PDFOptions} from "puppeteer"
 
 
-export{CreatePdf}
+export{CreatePdf, PDFOptions}
