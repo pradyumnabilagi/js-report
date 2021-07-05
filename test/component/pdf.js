@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import CreateUrl from "js-ts-report/build/classes/create-url"
+import {CreatePdf, CreateUrl, pd} from "js-ts-report"
+
 
 
 

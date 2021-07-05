@@ -40,9 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var puppeteer_1 = __importDefault(require("puppeteer"));
-/**
- * This for fromnt end
- */
 var CreatePdf = /** @class */ (function () {
     /**
      *
@@ -89,4 +86,4 @@ var CreatePdf = /** @class */ (function () {
     return CreatePdf;
 }());
 exports.default = CreatePdf;
-//# sourceMappingURL=create-pdf.js.map
+//# sourceMappingURL=create-pdf%20copy.js.map

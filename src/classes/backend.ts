@@ -14,16 +14,14 @@ export default class Backend {
         })
     }
 
-
-
-
     /**
      * This comples the html
      * @param html string
      * @param data data for mofiying html
      * @returns 
      */
-    compileHtmlString = (html: string, data?: any): any => {
+    compileHtmlString = async(path: string, data?: any): Promise<string> => {
+        let html = await this.readFile(path)
         let str = hbs.compile(html)(data)
         return str
     }

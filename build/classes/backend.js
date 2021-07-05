@@ -39,54 +39,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var puppeteer_1 = __importDefault(require("puppeteer"));
-/**
- * This for fromnt end
- */
-var CreatePdf = /** @class */ (function () {
-    /**
-     *
-     * @param _pdfOtpions Puppeteers pdfoprions
-     */
-    function CreatePdf(_pdfOtpions) {
+var handlebars_1 = __importDefault(require("handlebars"));
+var fs_1 = __importDefault(require("fs"));
+var Backend = /** @class */ (function () {
+    function Backend() {
         var _this = this;
         /**
-         * creates the of PDF file
+         * This comples the html
          * @param html string
-         * @param data data to handlebars
-         * @returns buffer
+         * @param data data for mofiying html
+         * @returns
          */
-        this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var _a, page, pdf;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        _a = this;
-                        return [4 /*yield*/, puppeteer_1.default.launch()];
+        this.compileHtmlString = function (path, data) { return __awaiter(_this, void 0, void 0, function () {
+            var html, str;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.readFile(path)];
                     case 1:
-                        _a.browser = _b.sent();
-                        return [4 /*yield*/, this.browser.newPage()];
-                    case 2:
-                        page = _b.sent();
-                        return [4 /*yield*/, page.setContent(html)];
-                    case 3:
-                        _b.sent();
-                        return [4 /*yield*/, page.pdf(this.pdfOptions)];
-                    case 4:
-                        pdf = _b.sent();
-                        return [4 /*yield*/, page.close()];
-                    case 5:
-                        _b.sent();
-                        return [4 /*yield*/, this.browser.close()];
-                    case 6:
-                        _b.sent();
-                        return [2 /*return*/, pdf];
+                        html = _a.sent();
+                        str = handlebars_1.default.compile(html)(data);
+                        return [2 /*return*/, str];
                 }
             });
         }); };
-        this.pdfOptions = _pdfOtpions;
     }
-    return CreatePdf;
+    Backend.prototype.readFile = function (path) {
+        return new Promise(function (resolve, reject) {
+            fs_1.default.readFile(path, "utf8", function (err, data) {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve(data);
+                }
+            });
+        });
+    };
+    return Backend;
 }());
-exports.default = CreatePdf;
-//# sourceMappingURL=create-pdf.js.map
+exports.default = Backend;
+//# sourceMappingURL=backend.js.map

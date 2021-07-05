@@ -1,8 +1,5 @@
 /// <reference types="node" />
 import puppteer from 'puppeteer';
-/**
- * This for fromnt end
- */
 export default class CreatePdf {
     private browser;
     private pdfOptions;
@@ -19,4 +16,4 @@ export default class CreatePdf {
      */
     create: (html: string, data?: any) => Promise<Buffer>;
 }
-//# sourceMappingURL=create-pdf.d.ts.map
+//# sourceMappingURL=create-pdf%20copy.d.ts.map

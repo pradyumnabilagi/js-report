@@ -1,0 +1,1 @@
+{"version":3,"file":"create-pdf copy.d.ts","sourceRoot":"","sources":["../../src/classes/create-pdf copy.ts"],"names":[],"mappings":";AAAA,OAAO,QAA6B,MAAM,WAAW,CAAA;AAErD,MAAM,CAAC,OAAO,OAAO,SAAS;IAC1B,OAAO,CAAC,OAAO,CAAmB;IAClC,OAAO,CAAC,UAAU,CAAuB;IAGzC;;;OAGG;gBACS,WAAW,EAAE,QAAQ,CAAC,UAAU;IAG5C;;;;;OAKG;IACH,MAAM,SAAgB,MAAM,SAAS,GAAG,KAAG,QAAQ,MAAM,CAAC,CAQzD;CAEJ"}
