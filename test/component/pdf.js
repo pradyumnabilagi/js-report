@@ -1,7 +1,7 @@
 
 // import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import {CreateUrl} from "js-ts-report"
+import CreateUrl from "js-ts-report/build/classes/create-url"
 
 
 
@@ -18,7 +18,9 @@ import {CreateUrl} from "js-ts-report"
       //   })
       //  const curUrl = window.URL.createObjectURL(new Blob([curFile.data], { type: 'application/pdf' }))
       //  setUrl(curUrl)
-      setUrl(new CreateUrl("/api/pdf").url())
+      let curUrl =await new CreateUrl("/api/pdf").url
+      console.log(curUrl)
+      setUrl()
         return () => {}
     }, [])
     
