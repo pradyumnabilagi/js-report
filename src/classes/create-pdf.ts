@@ -1,5 +1,4 @@
-import puppteer, { Page, Puppeteer } from 'puppeteer'
-import hbs from 'handlebars'
+import puppteer from 'puppeteer'
 /**
  * This for fromnt end
  */

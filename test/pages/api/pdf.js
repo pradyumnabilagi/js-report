@@ -1,39 +1,14 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import {CreatePdf} from "js-ts-report"
+import Backend from "js-ts-report/build/classes/backend"
 import path from "path"
 import fs from "fs"
 
 export default (req, res) => {
+let Path = path.resolve(__dirname , "../../../../templates/invoice.html");
+let backend = new Backend()
+let html =await backend.compileHtmlString(html)
 
-let Path = path.resolve(__dirname , "../../../../templates/invoice.html")
-
-  fs.readFile(Path,"utf-8" ,(err, data)=>{
-      if(err){
-        res.status(500).send(err)
-      }else{
-        const creatPdf = new CreatePdf({
-          "format" : "a5", 
-          "margin": {
-            bottom: 70, // minimum required for footer msg to display
-            left: 25,
-            right: 35,
-            top: 0,
-          },
-    
-          
-        })
-          
-         creatPdf.create(data).then(data=>{
-          res.status(200).send(data)
-        }).catch(err=> res.status(500).send(err))
-        .finally(()=>res.end())
-      
-    }
-
-  })
-
-  
- 
+res.status(200).json({html})
 
 }
   

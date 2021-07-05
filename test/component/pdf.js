@@ -3,9 +3,6 @@ import {CreatePdf, CreateUrl, pd} from "js-ts-report"
 
 
 
-
-
-
 export default function onDocumentLoadSuccess() {
   const [url, setUrl] = useState()
 

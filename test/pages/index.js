@@ -1,14 +1,14 @@
 import Head from 'next/head'
-import StringUrl from "../component/pdf"
-import AxiosUrl from "../component/AxiosPdf"
+// import AxiosUrl from "../component/AxiosPdf"
+// import { Puppeteer } from 'puppeteer'
 
 
 export default function Home(props) {
 
   return (
     <>
-      <StringUrl />
-      <AxiosUrl />
+      {/* <StringUrl /> */}
+      {/* <AxiosUrl /> */}
     </>
 
   )
