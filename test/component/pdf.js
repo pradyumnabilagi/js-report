@@ -4,12 +4,12 @@ import CreateUrl from "js-ts-report/build/classes/create-url"
 
 
 
+
 export default function onDocumentLoadSuccess() {
   const [url, setUrl] = useState()
 
   useEffect(async () => {
     let curUrl = await new CreateUrl("/api/pdf").geturl()
-
     setUrl(curUrl)
     return () => { }
   }, [])

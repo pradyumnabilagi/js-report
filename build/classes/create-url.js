@@ -47,27 +47,36 @@ var CreateUrl = /** @class */ (function () {
      */
     function CreateUrl(api) {
         this._url = "";
-        this._api = "";
+        if (!this.isString(api)) {
+            this.setUrl(api);
+        }
         this._api = api;
     }
     /**
-     * This return string of url from which one can access the pdf
-     */
+   * This return string of url from which one can access the pdf
+   */
     CreateUrl.prototype.geturl = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var curApi;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.api()];
+                    case 0:
+                        if (!this.isString(this._api)) return [3 /*break*/, 2];
+                        return [4 /*yield*/, this.api()];
                     case 1:
-                        _a.sent();
-                        return [2 /*return*/, this._url];
+                        curApi = _a.sent();
+                        this.setUrl(curApi);
+                        _a.label = 2;
+                    case 2: return [2 /*return*/, this._url];
                 }
             });
         });
     };
+    /**
+     * This sends axios call to backend and sets this._api to axiosreponse then
+     */
     CreateUrl.prototype.api = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var curUrl;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, axios_1.default.get("/api/pdf", {
@@ -76,13 +85,30 @@ var CreateUrl = /** @class */ (function () {
                                 'Accept': 'application/pdf'
                             }
                         })];
-                    case 1:
-                        curUrl = _a.sent();
-                        this._url = window.URL.createObjectURL(new Blob([curUrl.data], { type: 'application/pdf' }));
-                        return [2 /*return*/];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
+    };
+    /**
+     *
+     * @param axiosResponse this sets url
+     */
+    CreateUrl.prototype.setUrl = function (axiosResponse) {
+        this._url = window.URL.createObjectURL(new Blob([axiosResponse.data], { type: 'application/pdf' }));
+    };
+    /**
+     * run time type checking
+     * @param obj
+     * @returns false in case not string else returns obj
+     */
+    CreateUrl.prototype.isString = function (obj) {
+        if (obj) {
+            return obj;
+        }
+        else {
+            return false;
+        }
     };
     return CreateUrl;
 }());
