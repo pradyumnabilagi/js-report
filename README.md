@@ -1,31 +1,33 @@
 # js-ts-report
 ### react front code
+
+This npm module for createing pdf from from html or handlebars file.
+With module you can create the templates in (html or handlebars file) keep in backend like express or next js and use with backend code example
+and in fromend use CreateUrl class from `"js-ts-report/build/classes/create-url"` then create class instance and follow it getUrl method attach the url for link tag see code snippet below in case of next.js and 
+
 ```javascript
-
-import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-  
- export default   function onDocumentLoadSuccess() {
-    const [url, setUrl] = useState()
+import CreateUrl from "js-ts-report/build/classes/create-url"
 
-    useEffect(async() => {
-        let curFile = await axios.get("/api/pdf",{
-          responseType: 'arraybuffer',
-          headers: {
-            'Accept': 'application/pdf'
-          }
-        })
-       const curUrl = window.URL.createObjectURL(new Blob([curFile.data], { type: 'application/pdf' }))
-       setUrl(curUrl)
-        return () => {}
-    }, [])
-    
-  
-    return (
-      <div>
-        <a href={url}>click here to Print</a>
-      </div>
-    );
+
+
+
+export default function onDocumentLoadSuccess() {
+  const [url, setUrl] = useState()
+
+  useEffect(async () => {
+    let curUrl = await new CreateUrl("/api/pdf").geturl()
+
+    setUrl(curUrl)
+    return () => { }
+  }, [])
+
+
+  return (
+    <div>
+      <a href={url}>click here to Print</a>
+    </div>
+  );
 
 
 }
