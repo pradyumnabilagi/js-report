@@ -25,5 +25,7 @@
     "handlebars": "^4.7.7",
     "puppeteer": "^10.1.0"
   },
-  "files": ["build"]
+  "files": [
+    "build"
+  ]
 }
