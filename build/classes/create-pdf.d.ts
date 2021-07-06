@@ -1,13 +1,16 @@
 /// <reference types="node" />
-import puppteer from 'puppeteer';
+import puppteer, { LaunchOptions, BrowserConnectOptions, BrowserLaunchArgumentOptions } from 'puppeteer';
+declare type PuppeteerLounchOptions = BrowserLaunchArgumentOptions & LaunchOptions & BrowserConnectOptions;
 export default class CreatePdf {
     private browser;
     private pdfOptions;
+    private lounch;
     /**
      *
      * @param _pdfOtpions Puppeteers pdfoprions
+     * @param _lounch  Puppeteer Lounch Options
      */
-    constructor(_pdfOtpions: puppteer.PDFOptions);
+    constructor(_pdfOtpions: puppteer.PDFOptions, _lounch?: PuppeteerLounchOptions);
     /**
      * This comples the html
      * @param html string
@@ -23,4 +26,5 @@ export default class CreatePdf {
      */
     create: (html: string, data?: any) => Promise<Buffer>;
 }
+export {};
 //# sourceMappingURL=create-pdf.d.ts.map

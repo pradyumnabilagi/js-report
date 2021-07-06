@@ -45,8 +45,9 @@ var CreatePdf = /** @class */ (function () {
     /**
      *
      * @param _pdfOtpions Puppeteers pdfoprions
+     * @param _lounch  Puppeteer Lounch Options
      */
-    function CreatePdf(_pdfOtpions) {
+    function CreatePdf(_pdfOtpions, _lounch) {
         var _this = this;
         /**
          * This comples the html
@@ -70,7 +71,7 @@ var CreatePdf = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         _a = this;
-                        return [4 /*yield*/, puppeteer_1.default.launch()];
+                        return [4 /*yield*/, puppeteer_1.default.launch(this.lounch)];
                     case 1:
                         _a.browser = _b.sent();
                         return [4 /*yield*/, this.browser.newPage()];
@@ -94,6 +95,9 @@ var CreatePdf = /** @class */ (function () {
             });
         }); };
         this.pdfOptions = _pdfOtpions;
+        if (_lounch !== undefined) {
+            this.lounch = _lounch;
+        }
     }
     return CreatePdf;
 }());

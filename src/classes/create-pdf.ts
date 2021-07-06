@@ -1,17 +1,24 @@
-import puppteer, { Page, Puppeteer } from 'puppeteer'
+import puppteer, { Page, Puppeteer, LaunchOptions, BrowserConnectOptions, BrowserLaunchArgumentOptions } from 'puppeteer'
 import hbs from 'handlebars'
+type PuppeteerLounchOptions =  BrowserLaunchArgumentOptions & LaunchOptions & BrowserConnectOptions ;
 
 export default class CreatePdf{
     private browser!:puppteer.Browser
     private pdfOptions !: puppteer.PDFOptions
+    private lounch!:PuppeteerLounchOptions
 
 
     /**
      * 
      * @param _pdfOtpions Puppeteers pdfoprions
+     * @param _lounch  Puppeteer Lounch Options
      */
-    constructor(_pdfOtpions: puppteer.PDFOptions){
+    constructor(_pdfOtpions: puppteer.PDFOptions, _lounch?:PuppeteerLounchOptions){
         this.pdfOptions= _pdfOtpions
+        if(_lounch !== undefined){
+            this.lounch = _lounch
+        }
+       
     }
 
 
@@ -34,7 +41,7 @@ export default class CreatePdf{
      * @returns buffer
      */
     create = async (html:string, data?:any):Promise<Buffer> => {
-        this.browser = await puppteer.launch();
+        this.browser = await puppteer.launch(this.lounch);
         let page = await this.browser.newPage();
         let source =  this.compileHtmlString(html, data)
         await page.setContent(source);
@@ -45,3 +52,5 @@ export default class CreatePdf{
     }
 
 }
+
+
