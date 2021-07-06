@@ -41,33 +41,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
 var CreateUrl = /** @class */ (function () {
-    /**
-     * This creats url from which one can access pdf
-     * @param api this is api call string to backend of application
-     */
-    function CreateUrl(api) {
+    function CreateUrl() {
         this._url = "";
-        if (!this.isString(api)) {
-            this.setUrl(api);
-        }
-        this._api = api;
     }
-    /**
-   * This return string of url from which one can access the pdf
-   */
-    CreateUrl.prototype.geturl = function () {
+    Object.defineProperty(CreateUrl.prototype, "url", {
+        get: function () {
+            return this._url;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    CreateUrl.prototype.setAxiosResponse = function (api) {
+        this.setUrl(api);
+        this._api;
+        return this;
+    };
+    CreateUrl.prototype.setApi = function (api) {
         return __awaiter(this, void 0, void 0, function () {
             var curApi;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        if (!this.isString(this._api)) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.api()];
+                    case 0: return [4 /*yield*/, this.api(api)];
                     case 1:
                         curApi = _a.sent();
                         this.setUrl(curApi);
-                        _a.label = 2;
-                    case 2: return [2 /*return*/, this._url];
+                        return [2 /*return*/, this];
                 }
             });
         });
@@ -75,11 +73,11 @@ var CreateUrl = /** @class */ (function () {
     /**
      * This sends axios call to backend and sets this._api to axiosreponse then
      */
-    CreateUrl.prototype.api = function () {
+    CreateUrl.prototype.api = function (api) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, axios_1.default.get("/api/pdf", {
+                    case 0: return [4 /*yield*/, axios_1.default.get(api, {
                             responseType: 'arraybuffer',
                             headers: {
                                 'Accept': 'application/pdf'

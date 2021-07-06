@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios"
-import CreateUrl from "js-ts-report/build/classes/create-url"
+import {CreateUrl} from "js-ts-report/build/frontend"
 
 
 
@@ -17,7 +17,7 @@ export default function onDocumentLoadSuccess() {
             }
         })
 
-        let curUrl = await new CreateUrl(res).geturl()
+        let curUrl =  new CreateUrl().setAxiosResponse(res).url
 
         setUrl(curUrl)
         return () => { }
