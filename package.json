@@ -22,8 +22,10 @@
   "homepage": "https://github.com/pradyumnabilagi/js-report#readme",
   "dependencies": {
     "axios": "^0.21.1",
+    "chrome-aws-lambda": "^10.1.0",
     "handlebars": "^4.7.7",
-    "puppeteer": "^10.1.0"
+    "puppeteer": "^10.1.0",
+    "puppeteer-core": "^10.1.0"
   },
   "files": [
     "build"

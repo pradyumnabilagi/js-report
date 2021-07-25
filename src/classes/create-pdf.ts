@@ -1,4 +1,4 @@
-import puppteer, { Page, Puppeteer, LaunchOptions, BrowserConnectOptions, BrowserLaunchArgumentOptions } from 'puppeteer'
+import puppteer, { LaunchOptions, BrowserConnectOptions, BrowserLaunchArgumentOptions } from 'puppeteer'
 import hbs from 'handlebars'
 type PuppeteerLounchOptions =  BrowserLaunchArgumentOptions & LaunchOptions & BrowserConnectOptions ;
 

@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var puppeteer_1 = __importDefault(require("puppeteer"));
+var puppeteer_core_1 = __importDefault(require("puppeteer-core"));
 var handlebars_1 = __importDefault(require("handlebars"));
 var CreatePdf = /** @class */ (function () {
     /**
@@ -71,7 +71,7 @@ var CreatePdf = /** @class */ (function () {
                 switch (_b.label) {
                     case 0:
                         _a = this;
-                        return [4 /*yield*/, puppeteer_1.default.launch(this.lounch)];
+                        return [4 /*yield*/, puppeteer_core_1.default.launch(this.lounch)];
                     case 1:
                         _a.browser = _b.sent();
                         return [4 /*yield*/, this.browser.newPage()];
