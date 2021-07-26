@@ -24,7 +24,7 @@ export default (req, res) => {
       }
       )
 
-      creatPdf.createFromChromium(data).then(data => {
+      creatPdf.create(data).then(data => {
         res.status(200).send(data)
       }).catch(err => res.status(500).send(err))
         .finally(() => res.end())

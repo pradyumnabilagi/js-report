@@ -41,7 +41,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var puppeteer_1 = __importDefault(require("puppeteer"));
 var handlebars_1 = __importDefault(require("handlebars"));
-var chrome_aws_lambda_1 = __importDefault(require("chrome-aws-lambda"));
 var CreatePdf = /** @class */ (function () {
     /**
      *
@@ -71,40 +70,6 @@ var CreatePdf = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, puppeteer_1.default.launch(this.lounch)];
-                    case 1:
-                        browser = _a.sent();
-                        return [4 /*yield*/, browser.newPage()];
-                    case 2:
-                        page = _a.sent();
-                        source = this.compileHtmlString(html, data);
-                        return [4 /*yield*/, page.setContent(source)];
-                    case 3:
-                        _a.sent();
-                        return [4 /*yield*/, page.pdf(this.pdfOptions)];
-                    case 4:
-                        pdf = _a.sent();
-                        return [4 /*yield*/, page.close()];
-                    case 5:
-                        _a.sent();
-                        return [4 /*yield*/, browser.close()];
-                    case 6:
-                        _a.sent();
-                        return [2 /*return*/, pdf];
-                }
-            });
-        }); };
-        /**
-     * creates the of PDF file from chrome-aws-lambda
-     * More suted for serveress appliation like next js
-     * @param html string
-     * @param data data to handlebars
-     * @returns buffer
-     */
-        this.createFromChromium = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var browser, page, source, pdf;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, chrome_aws_lambda_1.default.puppeteer.launch(this.lounch)];
                     case 1:
                         browser = _a.sent();
                         return [4 /*yield*/, browser.newPage()];

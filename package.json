@@ -1,6 +1,6 @@
 {
   "name": "js-ts-report",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "This creates report based on templates Html",
   "main": "build/index.js",
   "scripts": {
@@ -22,7 +22,6 @@
   "homepage": "https://github.com/pradyumnabilagi/js-report#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "chrome-aws-lambda": "^10.1.0",
     "handlebars": "^4.7.7",
     "puppeteer": "^10.1.0"
   },

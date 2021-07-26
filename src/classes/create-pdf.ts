@@ -1,6 +1,6 @@
 import puppeteer, { LaunchOptions, BrowserConnectOptions, BrowserLaunchArgumentOptions } from 'puppeteer'
 import hbs from 'handlebars'
-import chromium from "chrome-aws-lambda"
+// import chromium from "chrome-aws-lambda"
 type PuppeteerLounchOptions =  BrowserLaunchArgumentOptions & LaunchOptions & BrowserConnectOptions ;
 
 export default class CreatePdf{
@@ -58,16 +58,16 @@ export default class CreatePdf{
      * @param data data to handlebars 
      * @returns buffer
      */
-    createFromChromium = async (html:string, data?:any):Promise<Buffer> => {
-        let browser = await chromium.puppeteer.launch(this.lounch);
-        let page = await browser.newPage();
-        let source =  this.compileHtmlString(html, data)
-        await page.setContent(source);
-        let pdf =  await page.pdf(this.pdfOptions)
-        await page.close()
-        await browser.close()
-        return pdf
-    }
+    // createFromChromium = async (html:string, data?:any):Promise<Buffer> => {
+    //     let browser = await chromium.puppeteer.launch(this.lounch);
+    //     let page = await browser.newPage();
+    //     let source =  this.compileHtmlString(html, data)
+    //     await page.setContent(source);
+    //     let pdf =  await page.pdf(this.pdfOptions)
+    //     await page.close()
+    //     await browser.close()
+    //     return pdf
+    // }
 
 }
 

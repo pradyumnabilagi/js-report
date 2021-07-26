@@ -24,14 +24,6 @@ export default class CreatePdf {
      * @returns buffer
      */
     create: (html: string, data?: any) => Promise<Buffer>;
-    /**
- * creates the of PDF file from chrome-aws-lambda
- * More suted for serveress appliation like next js
- * @param html string
- * @param data data to handlebars
- * @returns buffer
- */
-    createFromChromium: (html: string, data?: any) => Promise<Buffer>;
 }
 export {};
 //# sourceMappingURL=create-pdf.d.ts.map
