@@ -95,6 +95,16 @@ export default (req, res) => {
       }).catch(err => res.status(500).send(err))
         .finally(() => res.end())
 
+
+      // below code instead of above for serverless applications
+      
+      // creatPdf.createFromChromium(data).then(data => {
+      //   res.status(200).send(data)
+      // }).catch(err => res.status(500).send(err))
+      //   .finally(() => res.end())
+
+      
+
     }
 
   })
