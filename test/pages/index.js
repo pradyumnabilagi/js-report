@@ -1,14 +1,14 @@
 import Head from 'next/head'
-import PDF from "../component/pdf"
+import StringUrl from "../component/pdf"
+import AxiosUrl from "../component/AxiosPdf"
 
 
 export default function Home(props) {
 
   return (
     <>
-      <PDF
-
-      />
+      <StringUrl />
+      <AxiosUrl />
     </>
 
   )
@@ -16,7 +16,7 @@ export default function Home(props) {
 
 
 export async function getServerSideProps(context) {
- 
+
 
   return {
     props: {}, // will be passed to the page component as props
