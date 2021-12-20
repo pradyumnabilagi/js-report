@@ -51,7 +51,7 @@ export default class CreatePdf{
         } catch (error) {
             throw error
         }finally{
-            console.log("closed pdf")
+      
             await page.close()
             await browser.close()
         }
