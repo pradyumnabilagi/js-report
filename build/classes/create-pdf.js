@@ -66,7 +66,7 @@ var CreatePdf = /** @class */ (function () {
          * @returns buffer
          */
         this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var browser, page, source, pdf;
+            var browser, page, source, pdf, error_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, puppeteer_1.default.launch(this.lounch)];
@@ -75,20 +75,30 @@ var CreatePdf = /** @class */ (function () {
                         return [4 /*yield*/, browser.newPage()];
                     case 2:
                         page = _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        _a.trys.push([3, 6, 7, 10]);
                         source = this.compileHtmlString(html, data);
                         return [4 /*yield*/, page.setContent(source)];
-                    case 3:
+                    case 4:
                         _a.sent();
                         return [4 /*yield*/, page.pdf(this.pdfOptions)];
-                    case 4:
-                        pdf = _a.sent();
-                        return [4 /*yield*/, page.close()];
                     case 5:
+                        pdf = _a.sent();
+                        return [2 /*return*/, pdf];
+                    case 6:
+                        error_1 = _a.sent();
+                        throw error_1;
+                    case 7:
+                        console.log("closed pdf");
+                        return [4 /*yield*/, page.close()];
+                    case 8:
                         _a.sent();
                         return [4 /*yield*/, browser.close()];
-                    case 6:
+                    case 9:
                         _a.sent();
-                        return [2 /*return*/, pdf];
+                        return [7 /*endfinally*/];
+                    case 10: return [2 /*return*/];
                 }
             });
         }); };
