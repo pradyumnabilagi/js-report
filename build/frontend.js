@@ -6,4 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUrl = void 0;
 var create_url_1 = __importDefault(require("./classes/create-url"));
 exports.CreateUrl = create_url_1.default;
+// export type { PaperFormat }
 //# sourceMappingURL=frontend.js.map

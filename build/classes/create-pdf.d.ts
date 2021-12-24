@@ -1,15 +1,4 @@
-/// <reference types="node" />
-import puppeteer, { LaunchOptions, BrowserConnectOptions, BrowserLaunchArgumentOptions } from 'puppeteer';
-declare type PuppeteerLounchOptions = BrowserLaunchArgumentOptions & LaunchOptions & BrowserConnectOptions;
 export default class CreatePdf {
-    private pdfOptions;
-    private lounch;
-    /**
-     *
-     * @param _pdfOtpions Puppeteers pdfoprions
-     * @param _lounch  Puppeteer Lounch Options
-     */
-    constructor(_pdfOtpions: puppeteer.PDFOptions, _lounch?: PuppeteerLounchOptions);
     /**
      * This comples the html
      * @param html string
@@ -23,7 +12,6 @@ export default class CreatePdf {
      * @param data data to handlebars
      * @returns buffer
      */
-    create: (html: string, data?: any) => Promise<Buffer>;
+    create: (html: string, data?: any) => Promise<any>;
 }
-export {};
 //# sourceMappingURL=create-pdf.d.ts.map

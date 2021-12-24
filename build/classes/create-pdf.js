@@ -39,15 +39,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var puppeteer_1 = __importDefault(require("puppeteer"));
 var handlebars_1 = __importDefault(require("handlebars"));
+var htmltoPdfMake = require("html-to-pdfmake");
+var pdfmake_1 = __importDefault(require("pdfmake/build/pdfmake"));
+var vfs_fonts_1 = __importDefault(require("pdfmake/build/vfs_fonts"));
 var CreatePdf = /** @class */ (function () {
-    /**
-     *
-     * @param _pdfOtpions Puppeteers pdfoprions
-     * @param _lounch  Puppeteer Lounch Options
-     */
-    function CreatePdf(_pdfOtpions, _lounch) {
+    function CreatePdf() {
         var _this = this;
         /**
          * This comples the html
@@ -66,46 +63,39 @@ var CreatePdf = /** @class */ (function () {
          * @returns buffer
          */
         this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var browser, page, source, pdf, error_1;
+            var source, pdfmakeData;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, puppeteer_1.default.launch(this.lounch)];
-                    case 1:
-                        browser = _a.sent();
-                        return [4 /*yield*/, browser.newPage()];
-                    case 2:
-                        page = _a.sent();
-                        _a.label = 3;
-                    case 3:
-                        _a.trys.push([3, 6, 7, 10]);
-                        source = this.compileHtmlString(html, data);
-                        return [4 /*yield*/, page.setContent(source)];
-                    case 4:
-                        _a.sent();
-                        return [4 /*yield*/, page.pdf(this.pdfOptions)];
-                    case 5:
-                        pdf = _a.sent();
-                        return [2 /*return*/, pdf];
-                    case 6:
-                        error_1 = _a.sent();
-                        throw error_1;
-                    case 7:
-                        console.log("closed pdf");
-                        return [4 /*yield*/, page.close()];
-                    case 8:
-                        _a.sent();
-                        return [4 /*yield*/, browser.close()];
-                    case 9:
-                        _a.sent();
-                        return [7 /*endfinally*/];
-                    case 10: return [2 /*return*/];
-                }
+                source = this.compileHtmlString(html, data);
+                pdfmakeData = htmltoPdfMake(source);
+                console.log(pdfmakeData);
+                pdfmake_1.default.vfs = vfs_fonts_1.default.pdfMake.vfs;
+                pdfmake_1.default.fonts = {
+                    'Roboto': {
+                        normal: 'Roboto-Regular.ttf',
+                        bold: 'Roboto-Medium.ttf',
+                        italics: 'Roboto-Italic.ttf',
+                        bolditalics: 'Roboto-Italic.ttf'
+                    }
+                };
+                return [2 /*return*/];
             });
         }); };
-        this.pdfOptions = _pdfOtpions;
-        if (_lounch !== undefined) {
-            this.lounch = _lounch;
-        }
+        // create = async (html:string, data?:any):Promise<Buffer> => {
+        //     let browser = await puppeteer.launch(this.lounch);
+        //     let page = await browser.newPage();
+        //     try {
+        //         let source =  this.compileHtmlString(html, data)
+        //         await page.setContent(source);
+        //         let pdf =  await page.pdf(this.pdfOptions)
+        //         return pdf
+        //     } catch (error) {
+        //         throw error
+        //     }finally{
+        //         console.log("closed pdf")
+        //         await page.close()
+        //         await browser.close()
+        //     }
+        // }
     }
     return CreatePdf;
 }());

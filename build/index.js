@@ -6,4 +6,5 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreatePdf = void 0;
 var create_pdf_1 = __importDefault(require("./classes/create-pdf"));
 exports.CreatePdf = create_pdf_1.default;
+// export type { PaperFormat }
 //# sourceMappingURL=index.js.map

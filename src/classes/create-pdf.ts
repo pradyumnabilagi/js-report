@@ -1,6 +1,9 @@
 
 import hbs from 'handlebars'
-import htmltoPdfMake from "html-to-pdfmake"
+const  htmltoPdfMake = require("html-to-pdfmake")
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+
 
 
 export default class CreatePdf{
@@ -22,10 +25,36 @@ export default class CreatePdf{
      * @param data data to handlebars 
      * @returns buffer
      */
-    create = async (html:string, data?:any):Promise<Buffer> => {
+    create = async (html:string, data?:any):Promise<any> => {
         // convert html to pdfmake string
         let source =  this.compileHtmlString(html, data)
         const pdfmakeData = htmltoPdfMake(source)
+        console.log(pdfmakeData)
+        pdfMake.vfs = pdfFonts.pdfMake.vfs;
+        pdfMake.fonts = {
+            'Roboto': {
+                normal: 'Roboto-Regular.ttf',
+                bold: 'Roboto-Medium.ttf',
+                italics: 'Roboto-Italic.ttf',
+                bolditalics: 'Roboto-Italic.ttf'
+            }
+
+        }
+
+
+    
+        // const curPdf = async():Promise<Buffer>=>{
+        //   return  new Promise((resolve, reject)=>{
+        //         const curPdf = pdfMake.createPdf(pdfmakeData);
+        //         curPdf.getBuffer(cb=>{
+        //             resolve(cb)
+        //         })
+        //     })
+        // }
+
+        // return await curPdf()
+    
+        
         
        
 
