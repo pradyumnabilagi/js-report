@@ -7,7 +7,7 @@ export default function Home(props) {
 
   return (
     <>
-      <StringUrl />
+      {/* <StringUrl /> */}
       <AxiosUrl />
 
     </>

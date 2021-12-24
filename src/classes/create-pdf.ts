@@ -25,11 +25,11 @@ export default class CreatePdf{
      * @param data data to handlebars 
      * @returns buffer
      */
-    create = async (html:string, data?:any):Promise<any> => {
+    create = async (html:string, data?:any):Promise<Buffer> => {
         // convert html to pdfmake string
         let source =  this.compileHtmlString(html, data)
-        const pdfmakeData = htmltoPdfMake(source)
-        console.log(pdfmakeData)
+        // const pdfmakeData = htmltoPdfMake(source)
+        // console.log(pdfmakeData)
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
         pdfMake.fonts = {
             'Roboto': {
@@ -43,16 +43,25 @@ export default class CreatePdf{
 
 
     
-        // const curPdf = async():Promise<Buffer>=>{
-        //   return  new Promise((resolve, reject)=>{
-        //         const curPdf = pdfMake.createPdf(pdfmakeData);
-        //         curPdf.getBuffer(cb=>{
-        //             resolve(cb)
-        //         })
-        //     })
-        // }
+        const curPdf = async():Promise<Buffer>=>{
 
-        // return await curPdf()
+          return  new Promise((resolve, reject)=>{
+                const curPdf = pdfMake.createPdf(
+                    {
+                    content: [
+                        'First paragraph',
+                        'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
+                    ]
+                    
+                }
+                );
+                curPdf.getBuffer(cb=>{
+                    resolve(cb)
+                })
+            })
+        }
+
+        return await curPdf().then(data=>data)
     
         
         

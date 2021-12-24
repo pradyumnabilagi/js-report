@@ -63,21 +63,41 @@ var CreatePdf = /** @class */ (function () {
          * @returns buffer
          */
         this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var source, pdfmakeData;
+            var source, curPdf;
+            var _this = this;
             return __generator(this, function (_a) {
-                source = this.compileHtmlString(html, data);
-                pdfmakeData = htmltoPdfMake(source);
-                console.log(pdfmakeData);
-                pdfmake_1.default.vfs = vfs_fonts_1.default.pdfMake.vfs;
-                pdfmake_1.default.fonts = {
-                    'Roboto': {
-                        normal: 'Roboto-Regular.ttf',
-                        bold: 'Roboto-Medium.ttf',
-                        italics: 'Roboto-Italic.ttf',
-                        bolditalics: 'Roboto-Italic.ttf'
-                    }
-                };
-                return [2 /*return*/];
+                switch (_a.label) {
+                    case 0:
+                        source = this.compileHtmlString(html, data);
+                        // const pdfmakeData = htmltoPdfMake(source)
+                        // console.log(pdfmakeData)
+                        pdfmake_1.default.vfs = vfs_fonts_1.default.pdfMake.vfs;
+                        pdfmake_1.default.fonts = {
+                            'Roboto': {
+                                normal: 'Roboto-Regular.ttf',
+                                bold: 'Roboto-Medium.ttf',
+                                italics: 'Roboto-Italic.ttf',
+                                bolditalics: 'Roboto-Italic.ttf'
+                            }
+                        };
+                        curPdf = function () { return __awaiter(_this, void 0, void 0, function () {
+                            return __generator(this, function (_a) {
+                                return [2 /*return*/, new Promise(function (resolve, reject) {
+                                        var curPdf = pdfmake_1.default.createPdf({
+                                            content: [
+                                                'First paragraph',
+                                                'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
+                                            ]
+                                        });
+                                        curPdf.getBuffer(function (cb) {
+                                            resolve(cb);
+                                        });
+                                    })];
+                            });
+                        }); };
+                        return [4 /*yield*/, curPdf().then(function (data) { return data; })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
             });
         }); };
         // create = async (html:string, data?:any):Promise<Buffer> => {

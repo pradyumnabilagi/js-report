@@ -1,3 +1,4 @@
+/// <reference types="node" />
 export default class CreatePdf {
     /**
      * This comples the html
@@ -12,6 +13,6 @@ export default class CreatePdf {
      * @param data data to handlebars
      * @returns buffer
      */
-    create: (html: string, data?: any) => Promise<any>;
+    create: (html: string, data?: any) => Promise<Buffer>;
 }
 //# sourceMappingURL=create-pdf.d.ts.map
