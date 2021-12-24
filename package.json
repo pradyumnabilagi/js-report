@@ -23,6 +23,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "handlebars": "^4.7.7",
+    "html-to-pdfmake": "^2.3.7",
+    "pdfmake": "^0.2.4",
     "puppeteer": "^10.1.0"
   },
   "files": [
