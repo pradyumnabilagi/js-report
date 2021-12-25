@@ -4,6 +4,9 @@ const  htmltoPdfMake = require("html-to-pdfmake")
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
+var jsdom = require("jsdom");
+
+
 
 
 export default class CreatePdf{
@@ -26,10 +29,19 @@ export default class CreatePdf{
      * @returns buffer
      */
     create = async (html:string, data?:any):Promise<Buffer> => {
+
+        const { JSDOM } = jsdom;
+        const { window } = new JSDOM("")
         // convert html to pdfmake string
         let source =  this.compileHtmlString(html, data)
-        // const pdfmakeData = htmltoPdfMake(source)
-        // console.log(pdfmakeData)
+        const pdfmakeData = htmltoPdfMake(source,  {window:window})
+
+        const docDefinition = {
+            content: [
+                pdfmakeData
+            ]
+          }
+    
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
         pdfMake.fonts = {
             'Roboto': {
@@ -46,17 +58,10 @@ export default class CreatePdf{
         const curPdf = async():Promise<Buffer>=>{
 
           return  new Promise((resolve, reject)=>{
-                const curPdf = pdfMake.createPdf(
-                    {
-                    content: [
-                        'First paragraph',
-                        'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
-                    ]
-                    
-                }
-                );
-                curPdf.getBuffer(cb=>{
-                    resolve(cb)
+                const curPdf = pdfMake.createPdf(docDefinition);
+                curPdf.getBase64(cb=>{
+                    const buf = Buffer.from(cb, "base64")
+                    resolve(buf)
                 })
             })
         }

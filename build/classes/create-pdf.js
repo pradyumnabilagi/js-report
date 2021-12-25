@@ -43,6 +43,7 @@ var handlebars_1 = __importDefault(require("handlebars"));
 var htmltoPdfMake = require("html-to-pdfmake");
 var pdfmake_1 = __importDefault(require("pdfmake/build/pdfmake"));
 var vfs_fonts_1 = __importDefault(require("pdfmake/build/vfs_fonts"));
+var jsdom = require("jsdom");
 var CreatePdf = /** @class */ (function () {
     function CreatePdf() {
         var _this = this;
@@ -63,14 +64,20 @@ var CreatePdf = /** @class */ (function () {
          * @returns buffer
          */
         this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var source, curPdf;
+            var JSDOM, window, source, pdfmakeData, docDefinition, curPdf;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        JSDOM = jsdom.JSDOM;
+                        window = new JSDOM("").window;
                         source = this.compileHtmlString(html, data);
-                        // const pdfmakeData = htmltoPdfMake(source)
-                        // console.log(pdfmakeData)
+                        pdfmakeData = htmltoPdfMake(source, { window: window });
+                        docDefinition = {
+                            content: [
+                                pdfmakeData
+                            ]
+                        };
                         pdfmake_1.default.vfs = vfs_fonts_1.default.pdfMake.vfs;
                         pdfmake_1.default.fonts = {
                             'Roboto': {
@@ -83,14 +90,10 @@ var CreatePdf = /** @class */ (function () {
                         curPdf = function () { return __awaiter(_this, void 0, void 0, function () {
                             return __generator(this, function (_a) {
                                 return [2 /*return*/, new Promise(function (resolve, reject) {
-                                        var curPdf = pdfmake_1.default.createPdf({
-                                            content: [
-                                                'First paragraph',
-                                                'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
-                                            ]
-                                        });
-                                        curPdf.getBuffer(function (cb) {
-                                            resolve(cb);
+                                        var curPdf = pdfmake_1.default.createPdf(docDefinition);
+                                        curPdf.getBase64(function (cb) {
+                                            var buf = Buffer.from(cb, "base64");
+                                            resolve(buf);
                                         });
                                     })];
                             });

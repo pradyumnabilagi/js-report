@@ -42,6 +42,7 @@ export default class CreateUrl {
    */
   private setUrl(axiosResponse: AxiosResponse) {
     this._url = window.URL.createObjectURL(new Blob([axiosResponse.data], { type: 'application/pdf' }))
+  
 
   }
 

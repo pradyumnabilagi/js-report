@@ -17,10 +17,9 @@ export default (req, res) => {
       const creatPdf = new CreatePdf()
 
       creatPdf.create(data).then(data => {
-        console.log(data)
         res.status(200).send(data)
       }).catch(err => {
-        console.log(err)
+
         res.status(500).send(err)
       })
         .finally(() => res.end())
