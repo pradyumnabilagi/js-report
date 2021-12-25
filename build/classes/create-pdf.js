@@ -74,6 +74,7 @@ var CreatePdf = /** @class */ (function () {
                         source = this.compileHtmlString(html, data);
                         pdfmakeData = htmltoPdfMake(source, { window: window });
                         docDefinition = {
+                            pageSize: 'A5',
                             content: [
                                 pdfmakeData
                             ]

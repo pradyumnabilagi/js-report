@@ -1,6 +1,6 @@
 
 import hbs from 'handlebars'
-const  htmltoPdfMake = require("html-to-pdfmake")
+const htmltoPdfMake = require("html-to-pdfmake")
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 
@@ -9,7 +9,7 @@ var jsdom = require("jsdom");
 
 
 
-export default class CreatePdf{
+export default class CreatePdf {
 
     /**
      * This comples the html
@@ -17,8 +17,8 @@ export default class CreatePdf{
      * @param data data for mofiying html
      * @returns 
      */
-     compileHtmlString = (html:string, data?:any):any=>{
-        let str =  hbs.compile(html)(data)
+    compileHtmlString = (html: string, data?: any): any => {
+        let str = hbs.compile(html)(data)
         return str
     }
 
@@ -28,20 +28,22 @@ export default class CreatePdf{
      * @param data data to handlebars 
      * @returns buffer
      */
-    create = async (html:string, data?:any):Promise<Buffer> => {
+    create = async (html: string, data?: any): Promise<Buffer> => {
 
         const { JSDOM } = jsdom;
         const { window } = new JSDOM("")
         // convert html to pdfmake string
-        let source =  this.compileHtmlString(html, data)
-        const pdfmakeData = htmltoPdfMake(source,  {window:window})
+        let source = this.compileHtmlString(html, data)
+        const pdfmakeData = htmltoPdfMake(source, { window: window })
 
         const docDefinition = {
+            pageSize: 'A4',
             content: [
+
                 pdfmakeData
             ]
-          }
-    
+        }
+
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
         pdfMake.fonts = {
             'Roboto': {
@@ -54,23 +56,23 @@ export default class CreatePdf{
         }
 
 
-    
-        const curPdf = async():Promise<Buffer>=>{
 
-          return  new Promise((resolve, reject)=>{
-                const curPdf = pdfMake.createPdf(docDefinition);
-                curPdf.getBase64(cb=>{
+        const curPdf = async (): Promise<Buffer> => {
+
+            return new Promise((resolve, reject) => {
+                const curPdf = pdfMake.createPdf(docDefinition as any);
+                curPdf.getBase64(cb => {
                     const buf = Buffer.from(cb, "base64")
                     resolve(buf)
                 })
             })
         }
 
-        return await curPdf().then(data=>data)
-    
-        
-        
-       
+        return await curPdf().then(data => data)
+
+
+
+
 
     }
 
@@ -89,8 +91,8 @@ export default class CreatePdf{
     //         await page.close()
     //         await browser.close()
     //     }
-        
-       
+
+
 
     // }
 
