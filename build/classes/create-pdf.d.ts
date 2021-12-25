@@ -13,6 +13,6 @@ export default class CreatePdf {
      * @param data data to handlebars
      * @returns buffer
      */
-    create: (html: string, data?: any) => Promise<Buffer>;
+    create: (html: string, data: any) => Promise<Buffer>;
 }
 //# sourceMappingURL=create-pdf.d.ts.map
