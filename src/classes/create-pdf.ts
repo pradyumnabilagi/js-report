@@ -37,7 +37,7 @@ export default class CreatePdf {
         const pdfmakeData = htmltoPdfMake(source, { window: window })
 
         const docDefinition = {
-            pageSize: 'A4',
+            pageSize: 'A5',
             content: [
 
                 pdfmakeData
