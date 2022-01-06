@@ -54,7 +54,7 @@ var CreatePdf = /** @class */ (function () {
          * @returns buffer
          */
         this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var JSDOM, window, pdfmakeData, size, docDefinition, curPdf;
+            var JSDOM, window, pdfmakeData, size, content, docDefinition, curPdf;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -63,13 +63,15 @@ var CreatePdf = /** @class */ (function () {
                         window = new JSDOM("").window;
                         pdfmakeData = htmltoPdfMake(html, { window: window });
                         size = paperSize.getSize(data.paperSize, { unit: 'pixel', dpi: 72 })[0] - 80;
+                        content = [];
+                        if (data.headerbase64Image) {
+                            content.push({ image: data.headerbase64Image, width: size });
+                        }
+                        content.push(pdfmakeData);
                         docDefinition = {
                             pageSize: data.paperSize,
                             footer: function (currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; },
-                            content: [
-                                { image: data.headerbase64Image, width: size },
-                                pdfmakeData
-                            ]
+                            content: content
                         };
                         pdfmake_1.default.vfs = vfs_fonts_1.default.pdfMake.vfs;
                         pdfmake_1.default.fonts = {

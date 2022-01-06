@@ -29,15 +29,19 @@ export default class CreatePdf {
         const pdfmakeData = htmltoPdfMake(html, { window: window })
 
         const size:number = paperSize.getSize(data.paperSize, { unit: 'pixel', dpi: 72 })[0]  - 80
+
+        let content:any[]=[];
+        if(data.headerbase64Image){
+            content.push({image : data.headerbase64Image, width:size})
+        }
+
+        content.push(pdfmakeData)
       
         const docDefinition = {
             pageSize: data.paperSize,
 
             footer: function (currentPage: any, pageCount: any) { return currentPage.toString() + ' of ' + pageCount; },
-            content:[
-                {image : data.headerbase64Image, width:size},
-                pdfmakeData
-            ]
+            content:content
 
         }
 
