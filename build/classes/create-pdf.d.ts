@@ -10,7 +10,9 @@ export default class CreatePdf {
     create: (html: string, data: {
         paperSize: string;
         headerbase64Image?: string;
-    }) => Promise<Buffer>;
+        base64?: boolean;
+        esign?: string;
+    }) => Promise<Buffer | string>;
 }
 export {};
 //# sourceMappingURL=create-pdf.d.ts.map

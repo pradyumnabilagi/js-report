@@ -19,7 +19,7 @@ export default class CreatePdf {
     create = async (html: string, data: {
         paperSize:string, 
         headerbase64Image?:string
-        base64:boolean;
+        base64?:boolean;
         esign?:string
     
     }): Promise<Buffer | string> => {

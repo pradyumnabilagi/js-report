@@ -16,6 +16,9 @@ export default (req, res) => {
       res.status(500).send(err)
     } else {
       const creatPdf = new CreatePdf()
+      creatPdf.create(data, {"base64" : true, "headerbase64Image" : headerbase64Image, "paperSize" : "A5"}).then(data=>{
+        console.log(data)
+      })
 
       creatPdf.create(data, {"paperSize" : "A3", headerbase64Image}).then(data => {
         res.status(200).send(data)

@@ -85,8 +85,13 @@ var CreatePdf = /** @class */ (function () {
                                 return [2 /*return*/, new Promise(function (resolve, reject) {
                                         var curPdf = pdfmake_1.default.createPdf(docDefinition);
                                         curPdf.getBase64(function (cb) {
-                                            var buf = Buffer.from(cb, "base64");
-                                            resolve(buf);
+                                            if (data.base64) {
+                                                resolve(cb);
+                                            }
+                                            else {
+                                                var buf = Buffer.from(cb, "base64");
+                                                resolve(buf);
+                                            }
                                         });
                                     })];
                             });
