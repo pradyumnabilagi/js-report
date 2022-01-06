@@ -16,7 +16,13 @@ export default class CreatePdf {
      * @param data data to handlebars 
      * @returns buffer
      */
-    create = async (html: string, data: {paperSize:string, headerbase64Image?:string}): Promise<Buffer> => {
+    create = async (html: string, data: {
+        paperSize:string, 
+        headerbase64Image?:string
+        base64:boolean;
+        esign?:string
+    
+    }): Promise<Buffer | string> => {
 
         const { JSDOM } = jsdom;
         const { window } = new JSDOM("")
@@ -48,13 +54,17 @@ export default class CreatePdf {
 
 
 
-        const curPdf = async (): Promise<Buffer> => {
-
+        const curPdf = async (): Promise<Buffer| string> => {
             return new Promise((resolve, reject) => {
                 const curPdf = pdfMake.createPdf(docDefinition as any);
                 curPdf.getBase64(cb => {
-                    const buf = Buffer.from(cb, "base64")
-                    resolve(buf)
+                    if(data.base64){
+                        resolve(cb)
+                    }else{
+                        const buf = Buffer.from(cb, "base64")
+                        resolve(buf)
+                    }
+ 
                 })
             })
         }
