@@ -9,9 +9,10 @@ export default class CreatePdf {
      */
     create: (html: string, data: {
         paperSize: string;
-        headerbase64Image?: string;
-        base64?: boolean;
-        esign?: string;
+        headerbase64Image?: string | undefined;
+        base64?: boolean | undefined;
+        esign?: string | undefined;
+        qrcode?: string | undefined;
     }) => Promise<Buffer | string>;
 }
 export {};

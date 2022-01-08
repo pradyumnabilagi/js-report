@@ -54,11 +54,12 @@ var CreatePdf = /** @class */ (function () {
          * @returns buffer
          */
         this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var JSDOM, window, pdfmakeData, size, content, docDefinition, curPdf;
+            var JSDOM, window, pdfmakeData, size, content, qrcode, middle, docDefinition, curPdf;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        console.log(data.qrcode);
                         JSDOM = jsdom.JSDOM;
                         window = new JSDOM("").window;
                         pdfmakeData = htmltoPdfMake(html, { window: window });
@@ -68,6 +69,28 @@ var CreatePdf = /** @class */ (function () {
                             content.push({ image: data.headerbase64Image, width: size });
                         }
                         content.push(pdfmakeData);
+                        qrcode = {
+                            width: "33%",
+                            text: ""
+                        };
+                        if (data.qrcode) {
+                            qrcode = {
+                                width: "auto",
+                                qr: data.qrcode
+                            };
+                        }
+                        middle = {
+                            width: "*",
+                            text: ""
+                        };
+                        // let esign:any={
+                        //     width:"33%",
+                        //     text : "Signed By"
+                        // }
+                        if (data.esign) {
+                            content.push(content.push({ image: data.headerbase64Image, width: "100", alignment: 'right' }));
+                        }
+                        content.push({ columns: [qrcode, middle], columnGap: 30 });
                         docDefinition = {
                             pageSize: data.paperSize,
                             footer: function (currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; },

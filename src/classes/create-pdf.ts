@@ -20,9 +20,12 @@ export default class CreatePdf {
         paperSize:string, 
         headerbase64Image?:string
         base64?:boolean;
-        esign?:string
+        esign?:{image:string, nameLine1: string, nameLine2?:string},
+        qrcode ?: string
+
     
     }): Promise<Buffer | string> => {
+        console.log(data.qrcode)
 
         const { JSDOM } = jsdom;
         const { window } = new JSDOM("")
@@ -36,13 +39,49 @@ export default class CreatePdf {
         }
 
         content.push(pdfmakeData)
+
+        let qrcode:any={
+            width:"33%",
+            text : ""
+        }
+        if(data.qrcode){
+            qrcode = {
+                width:"auto",
+                qr: data.qrcode
+            }
+        }
+
+        let middle={
+            width:"*",
+            text : ""
+        }
+
+        // let esign:any={
+        //     width:"33%",
+        //     text : "Signed By"
+        // }
+
+        if(data.esign){
+            content.push(
+                content.push({image : data.esign.image, width:"100", alignment: 'right'},
+                {text: data.esign.nameLine1},
+                {text: data.esign.nameLine2}
+
+                ),
+                
+            )
+        }
+
+        content.push(
+            {columns:[qrcode, middle],columnGap: 30}
+          )
+
+
       
         const docDefinition = {
             pageSize: data.paperSize,
-
             footer: function (currentPage: any, pageCount: any) { return currentPage.toString() + ' of ' + pageCount; },
             content:content
-
         }
 
         pdfMake.vfs = pdfFonts.pdfMake.vfs;
