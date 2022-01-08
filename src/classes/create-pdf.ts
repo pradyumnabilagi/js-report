@@ -40,44 +40,37 @@ export default class CreatePdf {
 
         content.push(pdfmakeData)
 
-        let qrcode:any={
-            width:"33%",
-            text : ""
-        }
+
+
+    
+
         if(data.qrcode){
-            qrcode = {
-                width:"auto",
-                qr: data.qrcode
+            let l:number=100;
+            if(data.qrcode?.length > 250){
+                l=250
+            }else if(data.qrcode.length > 100){
+                l=data.qrcode.length /2
             }
-        }
-
-        let middle={
-            width:"*",
-            text : ""
-        }
-
-        // let esign:any={
-        //     width:"33%",
-        //     text : "Signed By"
-        // }
-
-        if(data.esign){
             content.push(
-                content.push({image : data.esign.image, width:"100", alignment: 'right'},
-                {text: data.esign.nameLine1},
-                {text: data.esign.nameLine2}
-
-                ),
+                {qr : data.qrcode, fit : `${l}`}
                 
+            )
+
+            content.push(
+                [ { text: '\n', nodeName: 'BR' } ]
             )
         }
 
-        content.push(
-            {columns:[qrcode, middle],columnGap: 30}
-          )
+    
 
-
-      
+        if(data.esign){
+            content.push({image : data.esign.image, width:"150", alignment: 'right'})
+            content.push({text: data.esign.nameLine1,alignment: 'right' })
+            if(data.esign.nameLine2){
+                content.push( {text: data.esign.nameLine2, alignment: 'right'})
+            }
+        }
+        
         const docDefinition = {
             pageSize: data.paperSize,
             footer: function (currentPage: any, pageCount: any) { return currentPage.toString() + ' of ' + pageCount; },

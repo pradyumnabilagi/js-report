@@ -54,10 +54,11 @@ var CreatePdf = /** @class */ (function () {
          * @returns buffer
          */
         this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var JSDOM, window, pdfmakeData, size, content, qrcode, middle, docDefinition, curPdf;
+            var JSDOM, window, pdfmakeData, size, content, l, docDefinition, curPdf;
             var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         console.log(data.qrcode);
                         JSDOM = jsdom.JSDOM;
@@ -69,28 +70,24 @@ var CreatePdf = /** @class */ (function () {
                             content.push({ image: data.headerbase64Image, width: size });
                         }
                         content.push(pdfmakeData);
-                        qrcode = {
-                            width: "33%",
-                            text: ""
-                        };
                         if (data.qrcode) {
-                            qrcode = {
-                                width: "auto",
-                                qr: data.qrcode
-                            };
+                            l = 100;
+                            if (((_a = data.qrcode) === null || _a === void 0 ? void 0 : _a.length) > 250) {
+                                l = 250;
+                            }
+                            else if (data.qrcode.length > 100) {
+                                l = data.qrcode.length / 2;
+                            }
+                            content.push({ qr: data.qrcode, fit: "" + l });
+                            content.push([{ text: '\n', nodeName: 'BR' }]);
                         }
-                        middle = {
-                            width: "*",
-                            text: ""
-                        };
-                        // let esign:any={
-                        //     width:"33%",
-                        //     text : "Signed By"
-                        // }
                         if (data.esign) {
-                            content.push(content.push({ image: data.headerbase64Image, width: "100", alignment: 'right' }));
+                            content.push({ image: data.esign.image, width: "150", alignment: 'right' });
+                            content.push({ text: data.esign.nameLine1, alignment: 'right' });
+                            if (data.esign.nameLine2) {
+                                content.push({ text: data.esign.nameLine2, alignment: 'right' });
+                            }
                         }
-                        content.push({ columns: [qrcode, middle], columnGap: 30 });
                         docDefinition = {
                             pageSize: data.paperSize,
                             footer: function (currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; },
@@ -122,7 +119,7 @@ var CreatePdf = /** @class */ (function () {
                             });
                         }); };
                         return [4 /*yield*/, curPdf().then(function (data) { return data; })];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1: return [2 /*return*/, _b.sent()];
                 }
             });
         }); };
