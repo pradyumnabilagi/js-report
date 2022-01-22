@@ -28,7 +28,7 @@ export default (req, res) => {
     </table>`
       creatPdf
         .create(data + table, {
-          paperSize: "A5",
+          paperSize: "A4",
           // headerbase64Image,
           qrcode: qrcode,
           esign: {

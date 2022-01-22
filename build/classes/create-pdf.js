@@ -54,12 +54,11 @@ var CreatePdf = /** @class */ (function () {
          * @returns buffer
          */
         this.create = function (html, data) { return __awaiter(_this, void 0, void 0, function () {
-            var JSDOM, window, pdfmakeData, size, content, qrcode, signTable, docDefinition, curPdf;
+            var JSDOM, window, pdfmakeData, size, content, qrcode, esign, signTable, docDefinition, curPdf;
             var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log(data.qrcode);
                         JSDOM = jsdom.JSDOM;
                         window = new JSDOM("").window;
                         pdfmakeData = htmltoPdfMake(html, {
@@ -86,11 +85,25 @@ var CreatePdf = /** @class */ (function () {
                                 return { qr: data.qrcode };
                             }
                         };
+                        esign = function () {
+                            if (data.esign) {
+                                return [
+                                    {
+                                        image: data.esign.image,
+                                        width: 100,
+                                        alignment: "right",
+                                    },
+                                    { text: data.esign.nameLine1, alignment: "right" },
+                                    { text: data.esign.nameLine2 || "", alignment: "right" },
+                                ];
+                            }
+                        };
                         signTable = [
                             {
+                                layout: 'noBorders',
                                 table: {
                                     widths: ["50%", "50%"],
-                                    body: [[{ qr: data.qrcode }, "Bilagi"]],
+                                    body: [[{ qr: data.qrcode, fit: "100" }, esign()]],
                                 },
                             },
                         ];

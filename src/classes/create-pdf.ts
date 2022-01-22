@@ -21,8 +21,6 @@ export default class CreatePdf {
       qrcode?: string;
     }
   ): Promise<Buffer | string> => {
-    console.log(data.qrcode);
-
     const { JSDOM } = jsdom;
     const { window } = new JSDOM("");
     const pdfmakeData = htmltoPdfMake(html, {
@@ -52,26 +50,27 @@ export default class CreatePdf {
       }
     };
 
-    // const esign = () => {
-    //   if (data.esign) {
-    //     return [
-    //       {
-    //         image: data.esign.image,
-    //         height: 50,
-    //         alignment: "right",
-    //       },
-    //       { text: data.esign.nameLine1, alignment: "right" },
-    //       { text: data.esign.nameLine2 || "", alignment: "right" },
-    //     ];
-    //   }
-    // };
+    const esign = () => {
+      if (data.esign) {
+        return [
+          {
+            image: data.esign.image,
+            width: 100,
+            alignment: "right",
+          },
+          { text: data.esign.nameLine1, alignment: "right" },
+          { text: data.esign.nameLine2 || "", alignment: "right" },
+        ];
+      }
+    };
 
     const signTable = [
       {
+        layout: 'noBorders',
         table: {
           widths: ["50%", "50%"],
 
-          body: [[{ qr: data.qrcode }, "Bilagi"]],
+          body: [[{ qr: data.qrcode, fit: `100` }, esign()]],
         },
       },
     ];
