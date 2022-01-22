@@ -16,16 +16,18 @@ export default (req, res) => {
       res.status(500).send(err);
     } else {
       const creatPdf = new CreatePdf();
-      const table = `<table style="width:9950px">
-      <tr >
-        <td style="width:50%">height:100px / width:250px</td>
-        <td style="width:50%">height:100px / width:'auto'</td>
-      </tr>
-      <tr>
-        <td >Here it will use 250px for the width because we have to use the largest col's width</td>
-        <td>height:200px / width:'auto'</td>
-      </tr>
-    </table>`
+    //   const table = `<table style="width:9950px">
+    //   <tr >
+    //     <td style="width:50%">height:100px / width:250px</td>
+    //     <td style="width:50%">height:100px / width:'auto'</td>
+    //   </tr>
+    //   <tr>
+    //     <td >Here it will use 250px for the width because we have to use the largest col's width</td>
+    //     <td>height:200px / width:'auto'</td>
+    //   </tr>
+    // </table>`
+
+    const table =`<div xmlns="http://www.w3.org/1999/xhtml"><table style="width:9950px;"><tr><th>Medcine</th><th>Frequency</th><th>Duration</th><th>Instructions</th><th>Route</th></tr><tr><td style="width:20%;">Tab Pantop 40mg</td><td style="width:20%;">1-1-1</td> <td style="width:20%;">For 5 Days</td><td style="width:20%;">After Food</td><td style="width:20%;">Oral</td></tr><tr><td style="width:20%;">Tab DOLO 650mg</td><td style="width:20%;">1-0-1</td> <td style="width:20%;">For 15 Days</td><td style="width:20%;">Before Food</td><td style="width:20%;">Oral</td></tr></table></div>	`
       creatPdf
         .create(data + table, {
           paperSize: "A3",
