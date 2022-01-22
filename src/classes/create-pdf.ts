@@ -39,30 +39,44 @@ export default class CreatePdf {
     }
 
     content.push(pdfmakeData);
-
-    if (data.qrcode) {
-      let l: number = 100;
-      if (data.qrcode?.length > 250) {
-        l = 250;
-      } else if (data.qrcode.length > 100) {
-        l = data.qrcode.length / 2;
+    const qrcode = () => {
+      if (data.qrcode) {
+        let l: number = 100;
+        if (data.qrcode?.length > 250) {
+          l = 250;
+        } else if (data.qrcode.length > 100) {
+          l = data.qrcode.length / 2;
+        }
+        // return { qr: data.qrcode, fit: `${l}` };
+        return { qr: data.qrcode };
       }
-      content.push({ qr: data.qrcode, fit: `${l}` });
+    };
 
-      content.push([{ text: "\n", nodeName: "BR" }]);
-    }
+    // const esign = () => {
+    //   if (data.esign) {
+    //     return [
+    //       {
+    //         image: data.esign.image,
+    //         height: 50,
+    //         alignment: "right",
+    //       },
+    //       { text: data.esign.nameLine1, alignment: "right" },
+    //       { text: data.esign.nameLine2 || "", alignment: "right" },
+    //     ];
+    //   }
+    // };
 
-    if (data.esign) {
-      content.push({
-        image: data.esign.image,
-        width: "150",
-        alignment: "right",
-      });
-      content.push({ text: data.esign.nameLine1, alignment: "right" });
-      if (data.esign.nameLine2) {
-        content.push({ text: data.esign.nameLine2, alignment: "right" });
-      }
-    }
+    const signTable = [
+      {
+        table: {
+          widths: ["50%", "50%"],
+
+          body: [[{ qr: data.qrcode }, "Bilagi"]],
+        },
+      },
+    ];
+
+    content.push(signTable);
 
     const docDefinition = {
       pageSize: data.paperSize,
