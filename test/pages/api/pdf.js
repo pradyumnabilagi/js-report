@@ -22,9 +22,18 @@ export default (req, res) => {
       res.status(500).send(err);
     } else {
       const creatPdf = new CreatePdf();
-
+      const table = `<table style="width:9950px">
+      <tr >
+        <td >height:100px / width:250px</td>
+        <td>height:100px / width:'auto'</td>
+      </tr>
+      <tr>
+        <td >Here it will use 250px for the width because we have to use the largest col's width</td>
+        <td>height:200px / width:'auto'</td>
+      </tr>
+    </table>`
       creatPdf
-        .create(data, {
+        .create(data + table, {
           paperSize: "A5",
           // headerbase64Image,
           qrcode: qrcode,

@@ -63,8 +63,11 @@ var CreatePdf = /** @class */ (function () {
                         console.log(data.qrcode);
                         JSDOM = jsdom.JSDOM;
                         window = new JSDOM("").window;
-                        pdfmakeData = htmltoPdfMake(html, { window: window });
-                        size = paperSize.getSize(data.paperSize, { unit: 'pixel', dpi: 72 })[0] - 80;
+                        pdfmakeData = htmltoPdfMake(html, {
+                            window: window,
+                            tableAutoSize: true,
+                        });
+                        size = paperSize.getSize(data.paperSize, { unit: "pixel", dpi: 72 })[0] - 80;
                         content = [];
                         if (data.headerbase64Image) {
                             content.push({ image: data.headerbase64Image, width: size });
@@ -79,28 +82,34 @@ var CreatePdf = /** @class */ (function () {
                                 l = data.qrcode.length / 2;
                             }
                             content.push({ qr: data.qrcode, fit: "" + l });
-                            content.push([{ text: '\n', nodeName: 'BR' }]);
+                            content.push([{ text: "\n", nodeName: "BR" }]);
                         }
                         if (data.esign) {
-                            content.push({ image: data.esign.image, width: "150", alignment: 'right' });
-                            content.push({ text: data.esign.nameLine1, alignment: 'right' });
+                            content.push({
+                                image: data.esign.image,
+                                width: "150",
+                                alignment: "right",
+                            });
+                            content.push({ text: data.esign.nameLine1, alignment: "right" });
                             if (data.esign.nameLine2) {
-                                content.push({ text: data.esign.nameLine2, alignment: 'right' });
+                                content.push({ text: data.esign.nameLine2, alignment: "right" });
                             }
                         }
                         docDefinition = {
                             pageSize: data.paperSize,
-                            footer: function (currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; },
-                            content: content
+                            footer: function (currentPage, pageCount) {
+                                return currentPage.toString() + " of " + pageCount;
+                            },
+                            content: content,
                         };
                         pdfmake_1.default.vfs = vfs_fonts_1.default.pdfMake.vfs;
                         pdfmake_1.default.fonts = {
-                            'Roboto': {
-                                normal: 'Roboto-Regular.ttf',
-                                bold: 'Roboto-Medium.ttf',
-                                italics: 'Roboto-Italic.ttf',
-                                bolditalics: 'Roboto-Italic.ttf'
-                            }
+                            Roboto: {
+                                normal: "Roboto-Regular.ttf",
+                                bold: "Roboto-Medium.ttf",
+                                italics: "Roboto-Italic.ttf",
+                                bolditalics: "Roboto-Italic.ttf",
+                            },
                         };
                         curPdf = function () { return __awaiter(_this, void 0, void 0, function () {
                             return __generator(this, function (_a) {
