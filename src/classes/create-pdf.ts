@@ -40,13 +40,13 @@ export default class CreatePdf {
     const qrcode = () => {
       if (data.qrcode) {
         let l: number = 100;
-        if (data.qrcode?.length > 250) {
-          l = 250;
-        } else if (data.qrcode.length > 100) {
-          l = data.qrcode.length / 2;
+        if (data.qrcode?.length > 300) {
+          l = 150;
+        } else {
+          l = 100
         }
-        // return { qr: data.qrcode, fit: `${l}` };
-        return { qr: data.qrcode };
+        return { qr: data.qrcode, fit: `${l}` };
+        // return { qr: data.qrcode };
       }
     };
 
@@ -70,7 +70,7 @@ export default class CreatePdf {
         table: {
           widths: ["50%", "50%"],
 
-          body: [[{ qr: data.qrcode, fit: `100` }, esign()]],
+          body: [[qrcode(), esign()]],
         },
       },
     ];

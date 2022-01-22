@@ -75,14 +75,14 @@ var CreatePdf = /** @class */ (function () {
                             var _a;
                             if (data.qrcode) {
                                 var l = 100;
-                                if (((_a = data.qrcode) === null || _a === void 0 ? void 0 : _a.length) > 250) {
-                                    l = 250;
+                                if (((_a = data.qrcode) === null || _a === void 0 ? void 0 : _a.length) > 300) {
+                                    l = 150;
                                 }
-                                else if (data.qrcode.length > 100) {
-                                    l = data.qrcode.length / 2;
+                                else {
+                                    l = 100;
                                 }
-                                // return { qr: data.qrcode, fit: `${l}` };
-                                return { qr: data.qrcode };
+                                return { qr: data.qrcode, fit: "" + l };
+                                // return { qr: data.qrcode };
                             }
                         };
                         esign = function () {
@@ -103,7 +103,7 @@ var CreatePdf = /** @class */ (function () {
                                 layout: 'noBorders',
                                 table: {
                                     widths: ["50%", "50%"],
-                                    body: [[{ qr: data.qrcode, fit: "100" }, esign()]],
+                                    body: [[qrcode(), esign()]],
                                 },
                             },
                         ];
