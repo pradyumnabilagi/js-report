@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "gcp-nrces-fhir": "^3.0.1",
     "js-ts-report": "file:.yalc/js-ts-report",
     "next": "11.0.1",
     "react": "17.0.2",
