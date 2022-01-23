@@ -27,7 +27,52 @@ export default (req, res) => {
     //   </tr>
     // </table>`
 
-    const table =`<div xmlns="http://www.w3.org/1999/xhtml"><table style="width:9950px;"><tr><th>Medcine</th><th>Frequency</th><th>Duration</th><th>Instructions</th><th>Route</th></tr><tr><td style="width:20%;">Tab Pantop 40mg</td><td style="width:20%;">1-1-1</td> <td style="width:20%;">For 5 Days</td><td style="width:20%;">After Food</td><td style="width:20%;">Oral</td></tr><tr><td style="width:20%;">Tab DOLO 650mg</td><td style="width:20%;">1-0-1</td> <td style="width:20%;">For 15 Days</td><td style="width:20%;">Before Food</td><td style="width:20%;">Oral</td></tr></table></div>	`
+    const table =`<div xmlns="http://www.w3.org/1999/xhtml">
+    <div style="text-align: right">Date:-Sun Jan 23 2022</div>
+    <div style="text-align: right; font-size: 9px">Docurment Status :final</div>
+    <div style="text-align: right; font-size: 9px">
+      Docurment Type :PrescriptionRecord
+    </div>
+    <table style="width: 9950px">
+      <tr>
+        <td style="width: 50%">
+          <div>Patient:- No NDHM M Patient.</div>
+          <div>MRN:- 33</div>
+          <div>Gender/Age: male/34 years ph: 999999999</div>
+        </td>
+        <td style="width: 50%">PrescriptionRecord</td>
+      </tr>
+    </table>
+    <hr/>
+    <div>
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <table style="width: 9950px">
+          <tr>
+            <th style="width: 20%">Medcine</th>
+            <th style="width: 20%">Frequency</th>
+            <th style="width: 20%">Duration</th>
+            <th style="width: 20%">Instructions</th>
+            <th style="width: 20%">Route</th>
+          </tr>
+          <tr>
+            <td>Tab Ecosprin 150mg</td>
+            <td>0-1-0</td>
+            <td>Continue</td>
+            <td>After Food</td>
+            <td>Oral</td>
+          </tr>
+          <tr>
+            <td>Tab \Pantop 40mg</td>
+            <td>0-1-0</td>
+            <td>Continue</td>
+            <td>After Food</td>
+            <td>Oral</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  `
       creatPdf
         .create(data + table, {
           paperSize: "A3",
