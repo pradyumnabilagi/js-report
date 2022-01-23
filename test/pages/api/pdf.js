@@ -16,16 +16,7 @@ export default (req, res) => {
       res.status(500).send(err);
     } else {
       const creatPdf = new CreatePdf();
-    //   const table = `<table style="width:9950px">
-    //   <tr >
-    //     <td style="width:50%">height:100px / width:250px</td>
-    //     <td style="width:50%">height:100px / width:'auto'</td>
-    //   </tr>
-    //   <tr>
-    //     <td >Here it will use 250px for the width because we have to use the largest col's width</td>
-    //     <td>height:200px / width:'auto'</td>
-    //   </tr>
-    // </table>`
+
 
     const table =`<div xmlns="http://www.w3.org/1999/xhtml">
     <div style="text-align: right">Date:-Sun Jan 23 2022</div>
@@ -73,10 +64,12 @@ export default (req, res) => {
     </div>
   </div>
   `
+
+
       creatPdf
-        .create(data + table, {
+        .create(table, {
           paperSize: "A3",
-          // headerbase64Image,
+          headerbase64Image,
           qrcode: qrcode,
           esign: {
             image: headerbase64Image,
