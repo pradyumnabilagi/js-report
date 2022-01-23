@@ -10,7 +10,16 @@ const route = async(req, res) => {
  
 
 
-let table = await getPrescriptionDoc()
+// let table = await getPrescriptionDoc()
+
+const table = `<table data-pdfmake="{'widths':['20%','30%','20%']}">
+<tr>
+  <td>Cell1</td>
+  <td>Cell2</td>
+  <td>Cell3</td>
+</tr>
+</table>`
+
 
   const creatPdf = new CreatePdf();
     const data= await creatPdf.create(table, {
@@ -37,7 +46,7 @@ let table = await getPrescriptionDoc()
 
 
 const getPrescriptionDoc = async () => {
-  let id= "29f92964-a0b9-4c2b-977b-de4f9f3cea7c"
+  let id= "125e79bd-4830-49b3-b163-34cbf75ae8c7"
   const prescriptionBundle = new PrescriptionBundle();
   const bundle =await prescriptionBundle.get(id)
   return bundle.data.entry.filter(el=>el.resource.resourceType=="Composition")[0].resource.text.div;
