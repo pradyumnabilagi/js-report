@@ -17,6 +17,10 @@ export default class CreatePdf {
             nameLine2?: string | undefined;
         } | undefined;
         qrcode?: string | undefined;
+        bottomMargin?: number | undefined;
+        leftMargin?: number | undefined;
+        rightMargin?: number | undefined;
+        topMargin?: number | undefined;
     }) => Promise<Buffer | string>;
 }
 export {};

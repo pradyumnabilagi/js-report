@@ -19,6 +19,10 @@ export default class CreatePdf {
       base64?: boolean;
       esign?: { image: string; nameLine1: string; nameLine2?: string };
       qrcode?: string;
+      bottomMargin?: number;
+      leftMargin?: number;
+      rightMargin?: number;
+      topMargin?: number;
     }
   ): Promise<Buffer | string> => {
     const { JSDOM } = jsdom;
@@ -43,10 +47,9 @@ export default class CreatePdf {
         if (data.qrcode?.length > 300) {
           l = 150;
         } else {
-          l = 100
+          l = 100;
         }
         return { qr: data.qrcode, fit: `${l}` };
-        // return { qr: data.qrcode };
       }
     };
 
@@ -66,7 +69,7 @@ export default class CreatePdf {
 
     const signTable = [
       {
-        layout: 'noBorders',
+        layout: "noBorders",
         table: {
           widths: ["50%", "50%"],
 
@@ -79,8 +82,17 @@ export default class CreatePdf {
 
     const docDefinition = {
       pageSize: data.paperSize,
-      footer: function (currentPage: any, pageCount: any) {
-        return currentPage.toString() + " of " + pageCount;
+      pageMargins: [
+        data.leftMargin || 40,
+        data.topMargin || 40,
+        data.rightMargin || 40,
+        data.bottomMargin || 40,
+      ],
+      footer: function (currentPage: any, pageCount: any, papersize: any) {
+        return {
+          text: "Page " + currentPage.toString() + " of " + pageCount,
+          alignment: "center",
+        };
       },
       content: content,
     };

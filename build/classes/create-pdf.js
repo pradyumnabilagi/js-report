@@ -82,7 +82,6 @@ var CreatePdf = /** @class */ (function () {
                                     l = 100;
                                 }
                                 return { qr: data.qrcode, fit: "" + l };
-                                // return { qr: data.qrcode };
                             }
                         };
                         esign = function () {
@@ -100,7 +99,7 @@ var CreatePdf = /** @class */ (function () {
                         };
                         signTable = [
                             {
-                                layout: 'noBorders',
+                                layout: "noBorders",
                                 table: {
                                     widths: ["50%", "50%"],
                                     body: [[qrcode(), esign()]],
@@ -110,8 +109,17 @@ var CreatePdf = /** @class */ (function () {
                         content.push(signTable);
                         docDefinition = {
                             pageSize: data.paperSize,
-                            footer: function (currentPage, pageCount) {
-                                return currentPage.toString() + " of " + pageCount;
+                            pageMargins: [
+                                data.leftMargin || 40,
+                                data.topMargin || 40,
+                                data.rightMargin || 40,
+                                data.bottomMargin || 40,
+                            ],
+                            footer: function (currentPage, pageCount, papersize) {
+                                return {
+                                    text: "Page " + currentPage.toString() + " of " + pageCount,
+                                    alignment: "center",
+                                };
                             },
                             content: content,
                         };
