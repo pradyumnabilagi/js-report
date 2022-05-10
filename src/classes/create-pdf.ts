@@ -4,6 +4,12 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 const paperSize = require("paper-size");
 var jsdom = require("jsdom");
 
+interface header {
+  currentPage: number;
+  pageCount: number;
+  pageSize: { width: number };
+}
+
 export default class CreatePdf {
   /**
    * creates the of PDF from pupp
@@ -16,6 +22,7 @@ export default class CreatePdf {
     data: {
       paperSize: string;
       headerbase64Image?: string;
+      header?: (options: header) => [];
       base64?: boolean;
       esign?: { image: string; nameLine1: string; nameLine2?: string };
       qrcode?: string;
@@ -88,6 +95,19 @@ export default class CreatePdf {
         data.rightMargin || 40,
         data.bottomMargin || 40,
       ],
+      header: function (
+        currentPage: number,
+        pageCount: number,
+        pageSize: { width: number }
+      ) {
+        if (data.header) {
+          return data.header({
+            currentPage: currentPage,
+            pageCount: pageCount,
+            pageSize: { width: pageSize.width },
+          });
+        }
+      },
       footer: function (currentPage: any, pageCount: any, papersize: any) {
         return {
           text: "Page " + currentPage.toString() + " of " + pageCount,

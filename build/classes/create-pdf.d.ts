@@ -1,5 +1,12 @@
 /// <reference types="node" />
 declare const paperSize: any;
+interface header {
+    currentPage: number;
+    pageCount: number;
+    pageSize: {
+        width: number;
+    };
+}
 export default class CreatePdf {
     /**
      * creates the of PDF from pupp
@@ -10,6 +17,7 @@ export default class CreatePdf {
     create: (html: string, data: {
         paperSize: string;
         headerbase64Image?: string | undefined;
+        header?: ((options: header) => []) | undefined;
         base64?: boolean | undefined;
         esign?: {
             image: string;

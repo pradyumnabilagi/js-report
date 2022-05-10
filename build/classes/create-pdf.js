@@ -115,6 +115,15 @@ var CreatePdf = /** @class */ (function () {
                                 data.rightMargin || 40,
                                 data.bottomMargin || 40,
                             ],
+                            header: function (currentPage, pageCount, pageSize) {
+                                if (data.header) {
+                                    return data.header({
+                                        currentPage: currentPage,
+                                        pageCount: pageCount,
+                                        pageSize: { width: pageSize.width },
+                                    });
+                                }
+                            },
                             footer: function (currentPage, pageCount, papersize) {
                                 return {
                                     text: "Page " + currentPage.toString() + " of " + pageCount,

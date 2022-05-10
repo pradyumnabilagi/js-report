@@ -169,6 +169,9 @@ const table = `
   const creatPdf = new CreatePdf();
     const data= await creatPdf.create(table, {
           paperSize: "A5",
+          header : (options)=>{
+            return options.currentPage
+          },
           headerbase64Image,
           bottomMargin:100,
           qrcode: qrcode,
