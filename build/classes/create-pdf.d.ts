@@ -1,6 +1,6 @@
 /// <reference types="node" />
 declare const paperSize: any;
-interface header {
+export interface PDF_HEADER {
     currentPage: number;
     pageCount: number;
     pageSize: {
@@ -17,7 +17,7 @@ export default class CreatePdf {
     create: (html: string, data: {
         paperSize: string;
         headerbase64Image?: string | undefined;
-        header?: ((options: header) => []) | undefined;
+        header?: ((options: PDF_HEADER) => []) | undefined;
         base64?: boolean | undefined;
         esign?: {
             image: string;

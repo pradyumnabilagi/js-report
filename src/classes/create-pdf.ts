@@ -4,7 +4,7 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 const paperSize = require("paper-size");
 var jsdom = require("jsdom");
 
-interface header {
+export interface PDF_HEADER {
   currentPage: number;
   pageCount: number;
   pageSize: { width: number };
@@ -22,7 +22,7 @@ export default class CreatePdf {
     data: {
       paperSize: string;
       headerbase64Image?: string;
-      header?: (options: header) => [];
+      header?: (options: PDF_HEADER) => [];
       base64?: boolean;
       esign?: { image: string; nameLine1: string; nameLine2?: string };
       qrcode?: string;
