@@ -95,6 +95,9 @@ export default class CreatePdf {
         };
       },
       content: content,
+      pageBreakBefore: function (currentNode: any) {
+        return currentNode.style && currentNode.style.indexOf("pagebreak") > -1;
+      },
     };
 
     pdfMake.vfs = pdfFonts.pdfMake.vfs;

@@ -122,6 +122,9 @@ var CreatePdf = /** @class */ (function () {
                                 };
                             },
                             content: content,
+                            pageBreakBefore: function (currentNode) {
+                                return currentNode.style && currentNode.style.indexOf("pagebreak") > -1;
+                            },
                         };
                         pdfmake_1.default.vfs = vfs_fonts_1.default.pdfMake.vfs;
                         pdfmake_1.default.fonts = {
