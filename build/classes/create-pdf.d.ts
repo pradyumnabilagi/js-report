@@ -7,6 +7,13 @@ export interface PDF_HEADER {
         width: number;
     };
 }
+export interface PDF_FOOter {
+    currentPage: number;
+    pageCount: number;
+    pageSize: {
+        width: number;
+    };
+}
 export default class CreatePdf {
     /**
      * creates the of PDF from pupp
@@ -18,6 +25,7 @@ export default class CreatePdf {
         paperSize: string;
         headerbase64Image?: string | undefined;
         header?: ((options: PDF_HEADER) => []) | undefined;
+        footer?: ((options: PDF_FOOter) => []) | undefined;
         base64?: boolean | undefined;
         esign?: {
             image: string;

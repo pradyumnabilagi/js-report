@@ -124,11 +124,14 @@ var CreatePdf = /** @class */ (function () {
                                     });
                                 }
                             },
-                            footer: function (currentPage, pageCount, papersize) {
-                                return {
-                                    text: "Page " + currentPage.toString() + " of " + pageCount,
-                                    alignment: "center",
-                                };
+                            footer: function (currentPage, pageCount, pageSize) {
+                                if (data.footer) {
+                                    return data.footer({
+                                        currentPage: currentPage,
+                                        pageCount: pageCount,
+                                        pageSize: { width: pageSize.width },
+                                    });
+                                }
                             },
                             content: content,
                             pageBreakBefore: function (currentNode) {

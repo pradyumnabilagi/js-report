@@ -10,6 +10,12 @@ export interface PDF_HEADER {
   pageSize: { width: number };
 }
 
+export interface PDF_FOOter {
+  currentPage: number;
+  pageCount: number;
+  pageSize: { width: number };
+}
+
 export default class CreatePdf {
   /**
    * creates the of PDF from pupp
@@ -23,6 +29,7 @@ export default class CreatePdf {
       paperSize: string;
       headerbase64Image?: string;
       header?: (options: PDF_HEADER) => [];
+      footer?: (options: PDF_FOOter) => [];
       base64?: boolean;
       esign?: { image: string; nameLine1: string; nameLine2?: string };
       qrcode?: string;
@@ -108,11 +115,14 @@ export default class CreatePdf {
           });
         }
       },
-      footer: function (currentPage: any, pageCount: any, papersize: any) {
-        return {
-          text: "Page " + currentPage.toString() + " of " + pageCount,
-          alignment: "center",
-        };
+      footer: function (currentPage: any, pageCount: any, pageSize: any) {
+        if (data.footer) {
+          return data.footer({
+            currentPage: currentPage,
+            pageCount: pageCount,
+            pageSize: { width: pageSize.width },
+          });
+        }
       },
       content: content,
       pageBreakBefore: function (currentNode: any) {
