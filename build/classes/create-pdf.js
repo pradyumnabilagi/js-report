@@ -135,7 +135,7 @@ var CreatePdf = /** @class */ (function () {
                             },
                             content: content,
                             defaultStyle: {
-                                fontSize: 10,
+                                fontSize: 9,
                             },
                             pageBreakBefore: function (currentNode) {
                                 return currentNode.style && currentNode.style.indexOf("pagebreak") > -1;
