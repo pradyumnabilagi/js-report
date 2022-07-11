@@ -81,7 +81,7 @@ var CreatePdf = /** @class */ (function () {
                                 else {
                                     l = 100;
                                 }
-                                return { qr: data.qrcode, fit: "" + l };
+                                return { qr: data.qrcode, fit: "".concat(l) };
                             }
                         };
                         esign = function () {
@@ -134,6 +134,9 @@ var CreatePdf = /** @class */ (function () {
                                 }
                             },
                             content: content,
+                            defaultStyle: {
+                                fontSize: 10,
+                            },
                             pageBreakBefore: function (currentNode) {
                                 return currentNode.style && currentNode.style.indexOf("pagebreak") > -1;
                             },

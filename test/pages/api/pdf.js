@@ -15,7 +15,6 @@ const route = async(req, res) => {
 
 
 const table = `
-<h1>Umesh</h1>
 <div class="pagebreak"> </div>
 <table data-pdfmake="{'widths':['20%','30%','20%']}">
 <tr>
@@ -168,10 +167,11 @@ const table = `
 
   const creatPdf = new CreatePdf();
     const data= await creatPdf.create(table, {
-          paperSize: "A5",
+          paperSize: "A4",
           header : (options)=>{
             return options.currentPage
           },
+      
           headerbase64Image,
           bottomMargin:100,
           qrcode: qrcode,
