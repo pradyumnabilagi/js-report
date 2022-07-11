@@ -126,7 +126,7 @@ export default class CreatePdf {
       },
       content: content,
       defaultStyle: {
-        fontSize: 9,
+        fontSize: 10,
       },
       pageBreakBefore: function (currentNode: any) {
         return currentNode.style && currentNode.style.indexOf("pagebreak") > -1;
