@@ -120,9 +120,6 @@ var CreatePdf = /** @class */ (function () {
                             }
                             return el;
                         });
-                        content.forEach(function (el) {
-                            console.log(el);
-                        });
                         docDefinition = {
                             pageSize: data.paperSize,
                             pageMargins: [
