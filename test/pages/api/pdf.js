@@ -164,12 +164,9 @@ const route = async (req, res) => {
 </table>`
 
 
-  table = `<p>Umesh R Bilagi</p>
-  <div class="pagebreak"> </div>
-<p>
-    <div>MD Gen DM Cardiology</div>
-    <div>KMC 35167</div>
-</p>`
+  table = `<p>HOLTER testing for templateZ</p>
+  <p>Umesh</p>
+  <p>R Bilagi<br />Jamesh Bond<br /><!-- pagebreak -->Hallo</p>`
 
 
   const creatPdf = new CreatePdf();

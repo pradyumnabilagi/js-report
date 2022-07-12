@@ -93,27 +93,6 @@ export default class CreatePdf {
     ];
 
     content.push(signTable);
-    // content = JSON.parse(JSON.stringify(content).replace(/html-p/g, "html-div"))
-    content = content.map(el => {
-      if (el.length > 0) {
-
-        el = el.filter((il: any) => {
-
-          if (il.style && il.style[0] == "html-p" && il.text == "") {
-
-          } else {
-            return il;
-          }
-
-
-        })
-
-      }
-
-
-      return el
-    })
-
 
 
     const docDefinition = {
