@@ -165,6 +165,7 @@ const route = async (req, res) => {
 
 
   table = `<p>Umesh R Bilagi</p>
+  <div class="pagebreak"> </div>
 <p>
     <div>MD Gen DM Cardiology</div>
     <div>KMC 35167</div>
