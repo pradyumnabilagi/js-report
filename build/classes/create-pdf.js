@@ -81,7 +81,7 @@ var CreatePdf = /** @class */ (function () {
                                 else {
                                     l = 100;
                                 }
-                                return { qr: data.qrcode, fit: "".concat(l) };
+                                return { qr: data.qrcode, fit: "" + l };
                             }
                         };
                         esign = function () {
@@ -107,6 +107,22 @@ var CreatePdf = /** @class */ (function () {
                             },
                         ];
                         content.push(signTable);
+                        // content = JSON.parse(JSON.stringify(content).replace(/html-p/g, "html-div"))
+                        content = content.map(function (el) {
+                            if (el.length > 0) {
+                                el = el.filter(function (il) {
+                                    if (il.style && il.style[0] == "html-p" && il.text == "") {
+                                    }
+                                    else {
+                                        return il;
+                                    }
+                                });
+                            }
+                            return el;
+                        });
+                        content.forEach(function (el) {
+                            console.log(el);
+                        });
                         docDefinition = {
                             pageSize: data.paperSize,
                             pageMargins: [
@@ -136,6 +152,7 @@ var CreatePdf = /** @class */ (function () {
                             content: content,
                             defaultStyle: {
                                 fontSize: 10,
+                                lineHeight: 1,
                             },
                             pageBreakBefore: function (currentNode) {
                                 return currentNode.style && currentNode.style.indexOf("pagebreak") > -1;

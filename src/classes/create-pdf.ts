@@ -93,6 +93,28 @@ export default class CreatePdf {
     ];
 
     content.push(signTable);
+    // content = JSON.parse(JSON.stringify(content).replace(/html-p/g, "html-div"))
+    content = content.map(el => {
+      if (el.length > 0) {
+
+        el = el.filter((il: any) => {
+
+          if (il.style && il.style[0] == "html-p" && il.text == "") {
+
+          } else {
+            return il;
+          }
+
+
+        })
+
+      }
+
+
+      return el
+    })
+
+
 
     const docDefinition = {
       pageSize: data.paperSize,
@@ -127,6 +149,7 @@ export default class CreatePdf {
       content: content,
       defaultStyle: {
         fontSize: 10,
+        lineHeight: 1,
       },
       pageBreakBefore: function (currentNode: any) {
         return currentNode.style && currentNode.style.indexOf("pagebreak") > -1;
