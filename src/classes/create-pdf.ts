@@ -41,6 +41,7 @@ export default class CreatePdf {
   ): Promise<Buffer | string> => {
     const { JSDOM } = jsdom;
     const { window } = new JSDOM("");
+    html = html.replace(/<!-- pagebreak -->/g,`<div class="pagebreak"> </div>`)
     const pdfmakeData = htmltoPdfMake(html, {
       window: window,
       tableAutoSize: true,
