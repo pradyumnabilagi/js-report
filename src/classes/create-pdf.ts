@@ -46,7 +46,7 @@ export default class CreatePdf {
     const pdfmakeData = htmltoPdfMake(html, {
       window: window,
       tableAutoSize: true,
-      defaultStyles : {p : {margin:[0, 3, 0, 5]}}
+      defaultStyles : {p : {margin:[0, 3, 0, 3]}}
     });
 
 
