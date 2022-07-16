@@ -1,3 +1,4 @@
+
 const htmltoPdfMake = require("html-to-pdfmake");
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -45,7 +46,9 @@ export default class CreatePdf {
     const pdfmakeData = htmltoPdfMake(html, {
       window: window,
       tableAutoSize: true,
+      defaultStyles : {p : {margin:[0, 3, 0, 5]}}
     });
+
 
     const size: number =
       paperSize.getSize(data.paperSize, { unit: "pixel", dpi: 72 })[0] - 80;

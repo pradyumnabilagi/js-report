@@ -1,6 +1,6 @@
 {
   "name": "js-ts-report",
-  "version": "5.0.7",
+  "version": "5.0.9",
   "description": "This creates report based on templates Html",
   "main": "build/index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "homepage": "https://github.com/pradyumnabilagi/js-report#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "html-to-pdfmake": "^2.3.8",
+    "html-to-pdfmake": "^2.4.4",
     "jsdom": "^19.0.0",
     "paper-size": "^1.1.0",
     "pdfmake": "^0.2.4"
