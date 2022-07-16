@@ -175,7 +175,7 @@ const route = async (req, res) => {
     header: (options) => {
       return options.currentPage
     },
-
+    paragraphSpace : 3,
     headerbase64Image,
     bottomMargin: 100,
     qrcode: qrcode,

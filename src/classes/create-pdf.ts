@@ -38,15 +38,17 @@ export default class CreatePdf {
       leftMargin?: number;
       rightMargin?: number;
       topMargin?: number;
+      paragraphSpace ?: number
     }
   ): Promise<Buffer | string> => {
     const { JSDOM } = jsdom;
     const { window } = new JSDOM("");
     html = html.replace(/<!-- pagebreak -->/g,`<div class="pagebreak"> </div>`)
+    const paragraphSpaceHalf = data.paragraphSpace ? data.paragraphSpace /2 : 3
     const pdfmakeData = htmltoPdfMake(html, {
       window: window,
       tableAutoSize: true,
-      defaultStyles : {p : {margin:[0, 3, 0, 3]}}
+      defaultStyles : {p : {margin:[0, paragraphSpaceHalf, 0, paragraphSpaceHalf]}}
     });
 
 
