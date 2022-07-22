@@ -34,11 +34,13 @@ export default class CreatePdf {
       base64?: boolean;
       esign?: { image: string; nameLine1: string; nameLine2?: string };
       qrcode?: string;
+      qrCodeWidth?:number;
       bottomMargin?: number;
       leftMargin?: number;
       rightMargin?: number;
       topMargin?: number;
       paragraphSpace ?: number
+      
     }
   ): Promise<Buffer | string> => {
     const { JSDOM } = jsdom;
@@ -64,7 +66,9 @@ export default class CreatePdf {
     const qrcode = () => {
       if (data.qrcode) {
         let l: number = 100;
-        if (data.qrcode?.length > 300) {
+        if (data.qrCodeWidth){
+          l=data.qrCodeWidth
+        }else if(data.qrcode?.length > 300) {
           l = 150;
         } else {
           l = 100;
