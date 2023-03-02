@@ -12,10 +12,17 @@ const route = async (req, res) => {
 
   // let table = await getPrescriptionDoc()
 
-
+{/* <div class="pagebreak"> </div> */}
   let table = `
-<div class="pagebreak"> </div>
-<table data-pdfmake="{'widths':['20%','30%','20%']}">
+
+<table data-pdfmake="{'widths':['20%','30%','20%'] ,'headerRows': 1}">
+<thead>
+<tr>
+  <th>Header</th>
+  <th>Header</th>
+  <th>Header</th>
+</tr>
+<thead>
 <tr>
   <td>Cell1</td>
   <td>Cell2</td>
@@ -164,9 +171,9 @@ const route = async (req, res) => {
 </table>`
 
 
-  table = `<p>HOLTER testing for templateZ</p>
-  <p>Umesh</p>
-  <p>R Bilagi<br />Jamesh Bond<br /><!-- pagebreak -->Hallo</p>`
+  // table = `<p>HOLTER testing for templateZ</p>
+  // <p>Umesh</p>
+  // <p>R Bilagi<br />Jamesh Bond<br /><!-- pagebreak -->Hallo</p>`
 
 
   const creatPdf = new CreatePdf();
