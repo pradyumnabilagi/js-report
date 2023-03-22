@@ -192,6 +192,9 @@ const route = async (req, res) => {
       nameLine1: "Dr Umesh R Bilagi",
       nameLine2: "MD DM",
     },
+    media: {"content": [headerbase64Image, headerbase64Image,headerbase64Image, headerbase64Image, headerbase64Image], 
+    "imagePerRow" : 2,
+     "singleImagePerPage" :false}
   }).then(d => d)
 
   res.status(200).send(data);

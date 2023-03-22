@@ -40,6 +40,7 @@ export default class CreatePdf {
       rightMargin?: number;
       topMargin?: number;
       paragraphSpace ?: number
+      media?:{singleImagePerPage: boolean, imagePerRow:number, content:string[]};
       
     }
   ): Promise<Buffer | string> => {
@@ -96,13 +97,46 @@ export default class CreatePdf {
         layout: "noBorders",
         table: {
           widths: ["50%", "50%"],
-
           body: [[qrcode(), esign()]],
         },
       },
     ];
 
     content.push(signTable);
+
+    if(data.media && data.media?.singleImagePerPage){
+      data.media.content.forEach((el,i)=>{
+          content.push({ image: el, width: size ,pageBreak:"before"})
+        })
+    }else if((data.media && data.media.imagePerRow)){
+      const contentLength = data.media?.content.length -1
+      let body: any[][]=[]
+          data.media.content.forEach((el,i)=>{
+            if(i%2 == 0 && i <  contentLength ){
+              body.push( [
+                { image: data.media?.content[i], width: size/2.1 || 1 }, 
+                { image: data.media?.content[i+1], width: size/2.1 || 1 }
+              ])
+            }else if(i%2 == 0 && i ==  contentLength ){
+              body.push( [
+                { image: data.media?.content[i], width: size/2.1 || 1 }, 
+                ""
+              ])
+            }
+          })
+
+
+          let imageTable = {
+            table: {
+              body :body
+            },
+            pageBreak:"before"
+
+          }
+  
+          content.push(imageTable)
+
+    }
 
 
     const docDefinition = {
