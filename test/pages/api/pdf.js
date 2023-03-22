@@ -177,24 +177,23 @@ const route = async (req, res) => {
 
 
   const creatPdf = new CreatePdf();
-  const data = await creatPdf.create(table, {
+  const data = await creatPdf.create("", {
     paperSize: "A4",
-    header: (options) => {
-      return options.currentPage
-    },
+    // header: (options) => {
+    //   return options.currentPage
+    // },
     paragraphSpace : 3,
     headerbase64Image,
     bottomMargin: 100,
-    qrcode: qrcode,
-    qrCodeWidth : 250,
-    esign: {
-      image: headerbase64Image,
-      nameLine1: "Dr Umesh R Bilagi",
-      nameLine2: "MD DM",
-    },
+    // qrcode: qrcode,
+    // qrCodeWidth : 250,
+    // esign: {
+    //   image: headerbase64Image,
+    //   nameLine1: "Dr Umesh R Bilagi",
+    //   nameLine2: "MD DM",
+    // },
     media: {"content": [headerbase64Image, headerbase64Image,headerbase64Image, headerbase64Image, headerbase64Image], 
-    "imagePerRow" : 2,
-     "singleImagePerPage" :false}
+     "singleImagePerPage" :true}
   }).then(d => d)
 
   res.status(200).send(data);

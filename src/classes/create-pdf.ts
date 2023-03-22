@@ -40,7 +40,7 @@ export default class CreatePdf {
       rightMargin?: number;
       topMargin?: number;
       paragraphSpace ?: number
-      media?:{singleImagePerPage: boolean, imagePerRow:number, content:string[]};
+      media?:{singleImagePerPage: boolean,  content:string[]};
       
       
     }
@@ -103,13 +103,15 @@ export default class CreatePdf {
       },
     ];
 
-    content.push(signTable);
+      content.push(signTable);
+    
+    
 
     if(data.media && data.media?.singleImagePerPage){
       data.media.content.forEach((el,i)=>{
           content.push({ image: el, width: size ,pageBreak:"before"})
         })
-    }else if((data.media && data.media.imagePerRow)){
+    }else if((data.media)){
       const contentLength = data.media?.content.length -1
       let body: any[][]=[]
           data.media.content.forEach((el,i)=>{
