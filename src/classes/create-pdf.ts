@@ -65,17 +65,17 @@ export default class CreatePdf {
     }
 
     content.push(pdfmakeData);
+
     const qrcode = () => {
       if (data.qrcode) {
-        let l: number = 100;
-        if (data.qrCodeWidth){
-          l=data.qrCodeWidth
-        }else if(data.qrcode?.length > 300) {
-          l = 150;
-        } else {
-          l = 100;
+
+        if(data.qrCodeWidth){
+          return { qr: data.qrcode, fit: `${data.qrCodeWidth}` };
+        }else{
+          return { qr: data.qrcode, fit: `${100}`};
         }
-        return { qr: data.qrcode, fit: `${l}` };
+        
+
       }
     };
 
@@ -98,7 +98,7 @@ export default class CreatePdf {
         layout: "noBorders",
         table: {
           widths: ["50%", "50%"],
-          body: [[qrcode(), esign()]],
+          body: [[qrcode() || "", esign() || ""]],
         },
       },
     ];

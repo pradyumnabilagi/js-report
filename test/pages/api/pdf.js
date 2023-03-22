@@ -186,7 +186,7 @@ const route = async (req, res) => {
     headerbase64Image,
     bottomMargin: 100,
     qrcode: qrcode,
-    qrCodeWidth : 50,
+    qrCodeWidth : 250,
     esign: {
       image: headerbase64Image,
       nameLine1: "Dr Umesh R Bilagi",
