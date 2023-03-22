@@ -42,6 +42,7 @@ export default class CreatePdf {
       paragraphSpace ?: number
       media?:{singleImagePerPage: boolean, imagePerRow:number, content:string[]};
       
+      
     }
   ): Promise<Buffer | string> => {
     const { JSDOM } = jsdom;
@@ -127,6 +128,7 @@ export default class CreatePdf {
 
 
           let imageTable = {
+            layout: "noBorders",
             table: {
               body :body
             },
