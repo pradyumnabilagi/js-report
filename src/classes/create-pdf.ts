@@ -109,7 +109,7 @@ export default class CreatePdf {
 
     if(data.media && data.media?.singleImagePerPage){
       data.media.content.forEach((el,i)=>{
-          content.push({ image: el, width: size ,pageBreak:"before"})
+          content.push({ image: el, width: size ,pageBreak:"after"})
         })
     }else if((data.media)){
       const contentLength = data.media?.content.length -1
