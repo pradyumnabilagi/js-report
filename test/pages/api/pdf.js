@@ -177,7 +177,7 @@ const route = async (req, res) => {
 
 
   const creatPdf = new CreatePdf();
-  const data = await creatPdf.create("", {
+  const data = await creatPdf.create("<div>Umesh</div>", {
     paperSize: "A4",
     // header: (options) => {
     //   return options.currentPage

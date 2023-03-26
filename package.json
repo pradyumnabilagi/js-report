@@ -1,6 +1,6 @@
 {
   "name": "js-ts-report",
-  "version": "5.0.20",
+  "version": "5.0.21",
   "description": "This creates report based on templates Html",
   "main": "build/index.js",
   "scripts": {
