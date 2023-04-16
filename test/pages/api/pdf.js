@@ -193,9 +193,8 @@ const route = async (req, res) => {
     //   nameLine2: "MD DM",
     // },
     media: {"content": [headerbase64Image, headerbase64Image,headerbase64Image, headerbase64Image, headerbase64Image], 
-     "singleImagePerPage" :true}
+     "singleImagePerPage" :false}
   }).then(d => d)
-
   res.status(200).send(data);
 }
 
