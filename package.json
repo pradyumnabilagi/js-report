@@ -1,6 +1,6 @@
 {
   "name": "js-ts-report",
-  "version": "5.0.22",
+  "version": "5.0.23",
   "description": "This creates report based on templates Html",
   "main": "build/index.js",
   "scripts": {
@@ -25,14 +25,14 @@
     "html-to-pdfmake": "^2.4.4",
     "jsdom": "^19.0.0",
     "paper-size": "^1.1.0",
-    "pdfmake": "^0.2.4"
+    "pdfmake": "^0.2.15"
   },
   "files": [
     "build"
   ],
   "devDependencies": {
     "@types/html-to-pdfmake": "^2.1.0",
-    "@types/pdfmake": "^0.1.19",
+    "@types/pdfmake": "^0.2.9",
     "typescript": "^4.7.4"
   }
 }
