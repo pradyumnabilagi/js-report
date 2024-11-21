@@ -189,7 +189,8 @@ export default class CreatePdf {
       },
     };
 
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    pdfMake.vfs = pdfFonts as unknown as { [file: string]: string };
+    // pdfMake.vfs = pdfFonts.pdfMake.vfs;
     pdfMake.fonts = {
       Roboto: {
         normal: "Roboto-Regular.ttf",
