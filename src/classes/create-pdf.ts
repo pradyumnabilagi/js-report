@@ -2,7 +2,9 @@
 const htmltoPdfMake = require("html-to-pdfmake");
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-const paperSize = require("paper-size");
+// const paperSize = require("paper-size");
+import paperSize from "../papersize"
+import papersize from "../papersize";
 var jsdom = require("jsdom");
 
 export interface PDF_HEADER {
